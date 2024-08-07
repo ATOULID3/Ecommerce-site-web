@@ -1,7 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\ForgotPasswordController;
 
+
+
+
+// ********************home******************************
 Route::get('/', function () {
     return view('home.welcome');
 });
@@ -12,7 +20,7 @@ Route::get('/home-03', function () {
     return view('home.home-03');
 });
 
-
+// ********************product******************************
 Route::get('/product', function () {
     return view('products.product');
 });
@@ -20,12 +28,12 @@ Route::get('/product-detail', function () {
     return view('products.product-detail');
 });
 
-
+// ********************shoping******************************
 Route::get('/shoping-cart', function () {
     return view('shoping.shoping-cart');
 });
 
-
+// ********************blog******************************
 Route::get('/blog', function () {
     return view('blog.blog');
 });
@@ -33,12 +41,46 @@ Route::get('/blog-detail', function () {
     return view('blog.blog-detail');
 });
 
-
+// ********************about******************************
 Route::get('/about', function () {
     return view('about.about');
 });
 
-
+// ********************contact******************************
 Route::get('/contact', function () {
     return view('contact.contact');
+});
+
+// ********************login******************************
+Route::get('/login',[LoginController::class,'login'])->name('login');
+Route::post('/login_trait',[LoginController::class,'login_trait']);
+Route::get('/logout',[LoginController::class,'logout'])->name('logout');
+Route::get('/register',[RegisterController::class,'register']);
+Route::post('/ajoute_register',[RegisterController::class,'ajoute_register']);
+Route::get('forgot-password', [ForgotPasswordController::class, 'forgotpassword'])->name('password.request');
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+// ********************admin******************************
+Route::middleware('auth')->group(function(){
+Route::get('/index-admin', function () {
+    return view('admin.admin-layout.dashbord');
+});
+// ********************profile******************************
+Route::get('/profile', function () {
+    return view('admin.profile.profile');
+});
+Route::get('/notification', function () {
+    return view('admin.profile.notification');
+});
+Route::get('/connections', function () {
+    return view('admin.profile.connections');
+});
+// ********************settings******************************
+Route::get('/settings', function () {
+    return view('admin.settings.settings');
+});
+Route::get('/Billing', function () {
+    return view('admin.settings.Billing');
+});
 });
