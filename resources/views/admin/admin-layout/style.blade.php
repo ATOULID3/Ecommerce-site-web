@@ -35,7 +35,18 @@
     <!-- Core CSS -->
     <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <!-- Dropzone.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" />
     <link rel="stylesheet" href="../assets/css/demo.css" />
+    <!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
+
+<!-- DataTables JS -->
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-5k6z+f8Vz0bLm11qs3m+y5w3fPC7+vc6yfjHG7UDFM4k8us+uC4zJw1TBLyKBdFi" crossorigin="anonymous">
+
+
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
@@ -59,7 +70,7 @@
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
               <div class="app-brand demo">
-                <a href="index.html" class="app-brand-link">
+                <a href="index-admin" class="app-brand-link">
                   <span class="app-brand-logo demo">
                     <svg
                       width="25"
@@ -128,11 +139,36 @@
               <ul class="menu-inner py-1">
                 <!-- Dashboard -->
                 <li class="menu-item active">
-                  <a href="index.html" class="menu-link">
+                  <a href="index-admin" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-home-circle"></i>
                     <div data-i18n="Analytics">Dashboard</div>
                   </a>
                 </li>
+                 <!-- product -->
+                 <li class="menu-item">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons bx bx-shopping-bag"></i>
+                      <div data-i18n="Layouts">Products</div>
+                    </a>
+
+                    <ul class="menu-sub">
+                      <li class="menu-item">
+                        <a href="/product-admin" class="menu-link">
+                          <div data-i18n="Without menu">Product</div>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="/add_product" class="menu-link">
+                          <div data-i18n="Without menu">Add Product</div>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="/category" class="menu-link">
+                          <div data-i18n="Without navbar">Category</div>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
 
                 <!-- Layouts -->
                 <li class="menu-item">
@@ -566,7 +602,7 @@
 
 
                             <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme">
+            {{-- <footer class="content-footer footer bg-footer-theme">
                 <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                   <div class="mb-2 mb-md-0">
                     ©
@@ -598,7 +634,7 @@
               </footer>
               <!-- / Footer -->
               <div class="content-backdrop fade"></div>
-            </div>
+            </div> --}}
             <!-- Content wrapper -->
           </div>
           <!-- / Layout page -->
@@ -629,5 +665,38 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<!-- Dropzone.js JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+<!-- jQuery (necessary for DataTables) -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+
+<!-- Optional: Bootstrap JS for additional components -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap JS with Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-X5SeQ8Gr2l3QUFLjDsFSe4QlkIF5OtJDUxDXFQq/6hU2j5KL6fgj8rxOYRaQ6pNr" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-7+q8Rhr6p+I3A5z6Ozx4KsLCbQtZayN7QZ79IQqaktrfTjkU0JGmP/LjzUrc8gCx" crossorigin="anonymous"></script>
+
+
+<!-- Initialize Dropzone -->
+<script>
+  Dropzone.options.dropzoneBasic = {
+    paramName: "file", // The name that will be used to transfer the file
+    maxFilesize: 2, // MB
+    acceptedFiles: "image/*",
+    dictDefaultMessage: "Drag and drop your image here or click to browse",
+    init: function() {
+      this.on("success", function(file, response) {
+        // Handle successful uploads here
+        console.log("File uploaded successfully:", response);
+      });
+      this.on("error", function(file, errorMessage) {
+        // Handle errors during upload
+        console.log("File upload error:", errorMessage);
+      });
+    }
+  };
+</script>
   </body>
 </html>

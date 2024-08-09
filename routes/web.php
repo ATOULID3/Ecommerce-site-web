@@ -83,4 +83,14 @@ Route::get('/settings', function () {
 Route::get('/Billing', function () {
     return view('admin.settings.Billing');
 });
+// ********************admin-product******************************
+Route::get('/product-admin', function () {
+    return view('admin.product.product-admin');
+});
+Route::get('/add_product', function () {
+    return view('admin.product.add_product');
+});
+Route::get('/category', function () {
+    return view('admin.product.category');
+});
 });
