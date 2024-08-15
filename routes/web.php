@@ -66,6 +66,9 @@ Route::middleware('auth')->group(function(){
 Route::get('/index-admin', function () {
     return view('admin.admin-layout.dashbord');
 });
+Route::get('//Ecommerce_dash', function () {
+    return view('admin.admin-layout.ecomdash');
+});
 // ********************profile******************************
 Route::get('/profile', function () {
     return view('admin.profile.profile');
@@ -92,5 +95,19 @@ Route::get('/add_product', function () {
 });
 Route::get('/category', function () {
     return view('admin.product.category');
+});
+// ********************Order******************************
+Route::get('/order', function () {
+    return view('admin.order.order');
+});
+Route::get('/order_detail', function () {
+    return view('admin.order.order_detail');
+});
+// ********************logistics******************************
+Route::get('/logistics', function () {
+    return view('admin.logistics.logistics');
+});
+Route::get('/dash_logi', function () {
+    return view('admin.logistics.dashlogi');
 });
 });

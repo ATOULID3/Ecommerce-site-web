@@ -139,11 +139,21 @@
               <ul class="menu-inner py-1">
                 <!-- Dashboard -->
                 <li class="menu-item active">
-                  <a href="index-admin" class="menu-link">
+                  <a href="/index-admin" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-home-circle"></i>
                     <div data-i18n="Analytics">Dashboard</div>
                   </a>
                 </li>
+                 <!-- DashboardEcommerce -->
+                <li class="menu-item ">
+                    <a href="/Ecommerce_dash" class="menu-link">
+                           <i class="menu-icon tf-icons bx bx-home"></i>
+                        <div data-i18n="Analytics">Ecommerce Dashboard</div>
+                    </a>
+                </li>
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">Products</span>
+                  </li>
                  <!-- product -->
                  <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -162,50 +172,57 @@
                           <div data-i18n="Without menu">Add Product</div>
                         </a>
                       </li>
-                      <li class="menu-item">
-                        <a href="/category" class="menu-link">
-                          <div data-i18n="Without navbar">Category</div>
-                        </a>
-                      </li>
                     </ul>
                   </li>
+                <!-- category -->
+                  <li class="menu-item">
+                    <a href="/category" class="menu-link">
+                      <i class="menu-icon tf-icons bx bx-category"></i>
+                      <div data-i18n="Analytics">Category</div>
+                    </a>
+                  </li>
 
-                <!-- Layouts -->
+                <!-- oreders -->
                 <li class="menu-item">
                   <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-layout"></i>
-                    <div data-i18n="Layouts">Layouts</div>
+                    <div data-i18n="Layouts">Order</div>
                   </a>
 
                   <ul class="menu-sub">
                     <li class="menu-item">
-                      <a href="layouts-without-menu.html" class="menu-link">
-                        <div data-i18n="Without menu">Without menu</div>
+                      <a href="/order" class="menu-link">
+                        <div data-i18n="Without menu">Order list</div>
                       </a>
                     </li>
                     <li class="menu-item">
-                      <a href="layouts-without-navbar.html" class="menu-link">
-                        <div data-i18n="Without navbar">Without navbar</div>
-                      </a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="layouts-container.html" class="menu-link">
-                        <div data-i18n="Container">Container</div>
-                      </a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="layouts-fluid.html" class="menu-link">
-                        <div data-i18n="Fluid">Fluid</div>
-                      </a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="layouts-blank.html" class="menu-link">
-                        <div data-i18n="Blank">Blank</div>
+                      <a href="/order_detail" class="menu-link">
+                        <div data-i18n="Without navbar">Order Details</div>
                       </a>
                     </li>
                   </ul>
                 </li>
+                <!-- Logistics -->
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-car"></i>
+                    <div data-i18n="Layouts">Logistics</div>
+                  </a>
 
+                  <ul class="menu-sub">
+                    <li class="menu-item">
+                      <a href="/dash_logi" class="menu-link">
+                        <div data-i18n="Without menu">dash logistics</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="/logistics" class="menu-link">
+                        <div data-i18n="Without navbar">list logistics</div>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <!-- pages -->
                 <li class="menu-header small text-uppercase">
                   <span class="menu-header-text">Pages</span>
                 </li>
@@ -528,6 +545,198 @@
                       >Star</a
                     >
                   </li>
+                  <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-2">
+                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                      <span class="position-relative">
+                        <i class="bx bx-bell bx-sm"></i>
+                        <span class="badge rounded-pill bg-danger badge-dot badge-notifications border"></span>
+                      </span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end p-0">
+                      <li class="dropdown-menu-header border-bottom">
+                        <div class="dropdown-header d-flex align-items-center py-3">
+                          <h6 class="mb-0 me-auto">Notification</h6>
+                          <div class="d-flex align-items-center h6 mb-0">
+                            <span class="badge bg-label-primary me-2">8 New</span>
+                            <a href="javascript:void(0)" class="dropdown-notifications-all p-2" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Mark all as read" data-bs-original-title="Mark all as read"><i class="bx bx-envelope-open text-heading"></i></a>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="dropdown-notifications-list scrollable-container ps">
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                            <div class="d-flex">
+                              <div class="flex-shrink-0 me-3">
+                                <div class="avatar">
+                                  <img src="../../assets/img/avatars/1.png" alt="" class="rounded-circle">
+                                </div>
+                              </div>
+                              <div class="flex-grow-1">
+                                <h6 class="small mb-0">Congratulation Lettie 🎉</h6>
+                                <small class="mb-1 d-block text-body">Won the monthly best seller gold badge</small>
+                                <small class="text-muted">1h ago</small>
+                              </div>
+                              <div class="flex-shrink-0 dropdown-notifications-actions">
+                                <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                                <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                            <div class="d-flex">
+                              <div class="flex-shrink-0 me-3">
+                                <div class="avatar">
+                                  <span class="avatar-initial rounded-circle bg-label-danger">CF</span>
+                                </div>
+                              </div>
+                              <div class="flex-grow-1">
+                                <h6 class="small mb-0">Charles Franklin</h6>
+                                <small class="mb-1 d-block text-body">Accepted your connection</small>
+                                <small class="text-muted">12hr ago</small>
+                              </div>
+                              <div class="flex-shrink-0 dropdown-notifications-actions">
+                                <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                                <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                            <div class="d-flex">
+                              <div class="flex-shrink-0 me-3">
+                                <div class="avatar">
+                                  <img src="../../assets/img/avatars/2.png" alt="" class="rounded-circle">
+                                </div>
+                              </div>
+                              <div class="flex-grow-1">
+                                <h6 class="small mb-0">New Message ✉️</h6>
+                                <small class="mb-1 d-block text-body">You have new message from Natalie</small>
+                                <small class="text-muted">1h ago</small>
+                              </div>
+                              <div class="flex-shrink-0 dropdown-notifications-actions">
+                                <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                                <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                            <div class="d-flex">
+                              <div class="flex-shrink-0 me-3">
+                                <div class="avatar">
+                                  <span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-cart"></i></span>
+                                </div>
+                              </div>
+                              <div class="flex-grow-1">
+                                <h6 class="small mb-0">Whoo! You have new order 🛒 </h6>
+                                <small class="mb-1 d-block text-body">ACME Inc. made new order $1,154</small>
+                                <small class="text-muted">1 day ago</small>
+                              </div>
+                              <div class="flex-shrink-0 dropdown-notifications-actions">
+                                <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                                <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                            <div class="d-flex">
+                              <div class="flex-shrink-0 me-3">
+                                <div class="avatar">
+                                  <img src="../../assets/img/avatars/9.png" alt="" class="rounded-circle">
+                                </div>
+                              </div>
+                              <div class="flex-grow-1">
+                                <h6 class="small mb-0">Application has been approved 🚀 </h6>
+                                <small class="mb-1 d-block text-body">Your ABC project application has been approved.</small>
+                                <small class="text-muted">2 days ago</small>
+                              </div>
+                              <div class="flex-shrink-0 dropdown-notifications-actions">
+                                <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                                <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                            <div class="d-flex">
+                              <div class="flex-shrink-0 me-3">
+                                <div class="avatar">
+                                  <span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-pie-chart-alt"></i></span>
+                                </div>
+                              </div>
+                              <div class="flex-grow-1">
+                                <h6 class="small mb-0">Monthly report is generated</h6>
+                                <small class="mb-1 d-block text-body">July monthly financial report is generated </small>
+                                <small class="text-muted">3 days ago</small>
+                              </div>
+                              <div class="flex-shrink-0 dropdown-notifications-actions">
+                                <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                                <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                            <div class="d-flex">
+                              <div class="flex-shrink-0 me-3">
+                                <div class="avatar">
+                                  <img src="../../assets/img/avatars/5.png" alt="" class="rounded-circle">
+                                </div>
+                              </div>
+                              <div class="flex-grow-1">
+                                <h6 class="small mb-0">Send connection request</h6>
+                                <small class="mb-1 d-block text-body">Peter sent you connection request</small>
+                                <small class="text-muted">4 days ago</small>
+                              </div>
+                              <div class="flex-shrink-0 dropdown-notifications-actions">
+                                <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                                <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                            <div class="d-flex">
+                              <div class="flex-shrink-0 me-3">
+                                <div class="avatar">
+                                  <img src="../../assets/img/avatars/6.png" alt="" class="rounded-circle">
+                                </div>
+                              </div>
+                              <div class="flex-grow-1">
+                                <h6 class="small mb-0">New message from Jane</h6>
+                                <small class="mb-1 d-block text-body">Your have new message from Jane</small>
+                                <small class="text-muted">5 days ago</small>
+                              </div>
+                              <div class="flex-shrink-0 dropdown-notifications-actions">
+                                <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                                <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                            <div class="d-flex">
+                              <div class="flex-shrink-0 me-3">
+                                <div class="avatar">
+                                  <span class="avatar-initial rounded-circle bg-label-warning"><i class="bx bx-error"></i></span>
+                                </div>
+                              </div>
+                              <div class="flex-grow-1">
+                                <h6 class="small mb-0">CPU is running high</h6>
+                                <small class="mb-1 d-block text-body">CPU Utilization Percent is currently at 88.63%,</small>
+                                <small class="text-muted">5 days ago</small>
+                              </div>
+                              <div class="flex-shrink-0 dropdown-notifications-actions">
+                                <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                                <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></li>
+                      <li class="border-top">
+                        <div class="d-grid p-4">
+                          <a class="btn btn-primary btn-sm d-flex" href="javascript:void(0);">
+                            <small class="align-middle">View all notifications</small>
+                          </a>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
 
                   <!-- User -->
                   <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -670,6 +879,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
 <!-- jQuery (necessary for DataTables) -->
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+	<!-- js -->
+	<script src="{{ asset('vendors/scripts/core.js')}}"></script>
+	<script src="{{ asset('vendors/scripts/script.min.js')}}"></script>
+	<script src="{{ asset('vendors/scripts/process.js')}}"></script>
+	<script src="{{ asset('vendors/scripts/layout-settings.js')}}"></script>
+	<script src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js')}}"></script>
+	<script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js')}}"></script>
+	<script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js')}}"></script>
+	<script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js')}}"></script>
+	<!-- buttons for Export datatable -->
+	<script src="{{asset('plugins/datatables/js/dataTables.buttons.min.js')}}"></script>
+	<script src="{{asset('plugins/datatables/js/buttons.bootstrap4.min.js')}}"></script>
+	<script src="{{asset('plugins/datatables/js/buttons.print.min.js')}}"></script>
+	<script src="{{asset('plugins/datatables/js/buttons.html5.min.js')}}"></script>
+	<script src="{{asset('plugins/datatables/js/buttons.flash.min.js')}}"></script>
+	<script src="{{asset('plugins/datatables/js/pdfmake.min.js')}}"></script>
+	<script src="{{asset('plugins/datatables/js/vfs_fonts.js')}}"></script>
+	<!-- Datatable Setting js -->
+	<script src="vendors/scripts/datatable-setting.js"></script></body>
 
 
 <!-- Optional: Bootstrap JS for additional components -->
