@@ -110,4 +110,11 @@ Route::get('/logistics', function () {
 Route::get('/dash_logi', function () {
     return view('admin.logistics.dashlogi');
 });
+// ********************clients******************************
+Route::get('/clients', function () {
+    return view('admin.clients.client');
+});
+Route::get('/add_client', function () {
+    return view('admin.clients.add_client');
+});
 });
