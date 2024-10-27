@@ -151,6 +151,30 @@
                         <div data-i18n="Analytics">Ecommerce Dashboard</div>
                     </a>
                 </li>
+                <!-- clients -->
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">Clients</span>
+                  </li>
+                  <li class="menu-item">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons bx bx-user"></i>
+                      <div data-i18n="Layouts">Clients</div>
+                    </a>
+
+                    <ul class="menu-sub">
+                      <li class="menu-item">
+                        <a href="/clients" class="menu-link">
+                          <div data-i18n="Without menu">Clients</div>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="/add_client" class="menu-link">
+                          <div data-i18n="Without menu">Add client</div>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                 <!-- product -->
                 <li class="menu-header small text-uppercase">
                     <span class="menu-header-text">Products</span>
                   </li>
@@ -222,29 +246,6 @@
                     </li>
                   </ul>
                 </li>
-                <!-- clients -->
-                <li class="menu-header small text-uppercase">
-                    <span class="menu-header-text">Clients</span>
-                  </li>
-                  <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon tf-icons bx bx-user"></i>
-                      <div data-i18n="Layouts">Clients</div>
-                    </a>
-
-                    <ul class="menu-sub">
-                      <li class="menu-item">
-                        <a href="/clients" class="menu-link">
-                          <div data-i18n="Without menu">Clients</div>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a href="/add_client" class="menu-link">
-                          <div data-i18n="Without menu">Add client</div>
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
                 <!-- pages -->
                 {{-- <li class="menu-header small text-uppercase">
                   <span class="menu-header-text">Pages</span>
@@ -760,6 +761,14 @@
                       </li>
                     </ul>
                   </li>
+                  <li class="nav-item dropdown-notifications">
+                    <a class="nav-link " href="/emails"  data-bs-auto-close="outside" aria-expanded="false">
+                      <span class="position-relative">
+                        <i class="bx bx-envelope bx-sm"></i>
+                        <span class="badge rounded-pill bg-danger badge-dot badge-notifications border"></span>
+                      </span>
+                    </a>
+                  </li>
 
                   <!-- User -->
                   <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -885,7 +894,9 @@
 
     <script src="../assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
-
+    <!-- sweetalert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
     <!-- Vendors JS -->
     <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
 

@@ -20,9 +20,10 @@
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
+                        @foreach ( $clients as $client )
                       <tr>
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Angular Project</strong></td>
-                        <td>Albert Cook</td>
+                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{$client->name}}</strong></td>
+                        <td>{{$client->email}}</td>
                         <td>
                           <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
                             <li
@@ -64,13 +65,17 @@
                               <a class="dropdown-item" href="javascript:void(0);"
                                 ><i class="bx bx-edit-alt me-1"></i> Edit</a
                               >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i> Delete</a
-                              >
+                              <form id="delete-client-{{ $client->id }}" action="{{ route('clients.destroy', $client->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" class="dropdown-item" onclick="confirmDelete('{{ $client->id }}')">
+                                    <i class="bx bx-trash me-1"></i> Delete
+                                </button>
+                            </form>
                             </div>
                           </div>
                         </td>
-                      </tr>
+                      {{-- </tr>
                       <tr>
                         <td><i class="fab fa-react fa-lg text-info me-3"></i> <strong>React Project</strong></td>
                         <td>Barry Hunter</td>
@@ -225,10 +230,44 @@
                             </div>
                           </div>
                         </td>
-                      </tr>
+                      </tr> --}}
+                      @endforeach
                     </tbody>
                   </table>
                 </div>
               </div>
+              <div class="d-flex justify-content-center">
+                {{ $clients->links() }}
+            </div>
+
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: '{{ session('success') }}',
+        confirmButtonText: 'OK'
+    });
+</script>
+@endif
+<script>
+function confirmDelete(clientId) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('delete-client-' + clientId).submit();
+        }
+    });
+}
+</script>
 @endsection

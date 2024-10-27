@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -111,10 +112,12 @@ Route::get('/dash_logi', function () {
     return view('admin.logistics.dashlogi');
 });
 // ********************clients******************************
-Route::get('/clients', function () {
-    return view('admin.clients.client');
-});
-Route::get('/add_client', function () {
-    return view('admin.clients.add_client');
+Route::get('/clients',[ClientController::class,'client'])->name('clients');
+Route::get('/add_client',[ClientController::class,'add_client'])->name('add_client');
+Route::post('/store',[ClientController::class,'store'])->name('store');
+Route::delete('/client/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
+// ********************emails******************************
+Route::get('/emails', function () {
+    return view('admin.emails.emails');
 });
 });
