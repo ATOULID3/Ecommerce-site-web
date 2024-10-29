@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\ClientController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
@@ -94,9 +95,10 @@ Route::get('/product-admin', function () {
 Route::get('/add_product', function () {
     return view('admin.product.add_product');
 });
-Route::get('/category', function () {
-    return view('admin.product.category');
-});
+// ********************category******************************
+Route::get('/category',[CategoryController::class,'category'])->name('category');
+Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
+Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 // ********************Order******************************
 Route::get('/order', function () {
     return view('admin.order.order');

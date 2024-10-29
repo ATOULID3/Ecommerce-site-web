@@ -178,6 +178,13 @@
                 <li class="menu-header small text-uppercase">
                     <span class="menu-header-text">Products</span>
                   </li>
+                <!-- category -->
+                <li class="menu-item">
+                    <a href="/category" class="menu-link">
+                      <i class="menu-icon tf-icons bx bx-category"></i>
+                      <div data-i18n="Analytics">Category</div>
+                    </a>
+                  </li>
                  <!-- product -->
                  <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -198,14 +205,6 @@
                       </li>
                     </ul>
                   </li>
-                <!-- category -->
-                  <li class="menu-item">
-                    <a href="/category" class="menu-link">
-                      <i class="menu-icon tf-icons bx bx-category"></i>
-                      <div data-i18n="Analytics">Category</div>
-                    </a>
-                  </li>
-
                 <!-- oreders -->
                 <li class="menu-item">
                   <a href="javascript:void(0);" class="menu-link menu-toggle">

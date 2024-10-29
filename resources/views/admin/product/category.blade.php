@@ -11,17 +11,19 @@
       <table class="table">
         <thead class="table-light">
           <tr>
+            <th>title</th>
+            <th>description</th>
+            <th>images</th>
             <th>categories</th>
-            <th>total products</th>
-            <th>total earning</th>
-            <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody class="table-border-bottom-0">
+            @foreach ($categories as $category)
+
           <tr>
-            <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Angular Project</strong></td>
-            <td>Albert Cook</td>
+            <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{$category->title}}</strong></td>
+            <td>{{$category->description}}</td>
             <td>
               <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
                 <li
@@ -53,7 +55,7 @@
                 </li>
               </ul>
             </td>
-            <td><span class="badge bg-label-primary me-1">Active</span></td>
+            <td><span class="badge bg-label-success me-1">{{$category->status}}</span></td>
             <td>
               <div class="dropdown">
                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -63,14 +65,18 @@
                   <a class="dropdown-item" href="javascript:void(0);"
                     ><i class="bx bx-edit-alt me-1"></i> Edit</a
                   >
-                  <a class="dropdown-item" href="javascript:void(0);"
-                    ><i class="bx bx-trash me-1"></i> Delete</a
-                  >
+                  <form id="delete-category-{{ $category->id }}" action="{{ route('categories.destroy', $category->id) }}" method="POST" >
+                    @csrf
+                    @method('DELETE')
+                    <button type="button" class="dropdown-item" onclick="confirmDelete('{{ $category->id }}')">
+                        <i class="bx bx-trash me-1"></i> Delete
+                    </button>
+                </form>
                 </div>
               </div>
             </td>
           </tr>
-          <tr>
+          {{-- <tr>
             <td><i class="fab fa-react fa-lg text-info me-3"></i> <strong>React Project</strong></td>
             <td>Barry Hunter</td>
             <td>
@@ -534,7 +540,8 @@
                 </div>
               </div>
             </td>
-          </tr>
+          </tr> --}}
+          @endforeach
         </tbody>
       </table>
     </div>
@@ -544,28 +551,47 @@
           <h5 id="offcanvasEcommerceCategoryListLabel" class="offcanvas-title">Add Category</h5>
           <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
+        @if ($errors->any())
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            let errorMessages = `
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            `;
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops... Something went wrong!',
+                html: errorMessages,
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
         <!-- Offcanvas Body -->
         <div class="offcanvas-body border-top">
-          <form class="pt-0 fv-plugins-bootstrap5 fv-plugins-framework" id="eCommerceCategoryListForm" onsubmit="return true" novalidate="novalidate">
+          <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data" class="pt-0 fv-plugins-bootstrap5 fv-plugins-framework" id="eCommerceCategoryListForm" onsubmit="return true" novalidate="novalidate">
+            @csrf
             <!-- Title -->
             <div class="mb-6 fv-plugins-icon-container">
               <label class="form-label" for="ecommerce-category-title">Title</label>
-              <input type="text" class="form-control" id="ecommerce-category-title" placeholder="Enter category title" name="categoryTitle" aria-label="category title">
+              <input type="text" class="form-control" id="title" placeholder="Enter category title" name="title" aria-label="category title">
             <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div></div>
             <!-- Slug -->
             <div class="mb-6 fv-plugins-icon-container">
               <label class="form-label" for="ecommerce-category-slug">Slug</label>
-              <input type="text" id="ecommerce-category-slug" class="form-control" placeholder="Enter slug" aria-label="slug" name="slug">
+              <input type="text" id="slug" class="form-control" placeholder="Enter slug" aria-label="slug" name="slug">
             <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div></div>
             <!-- Image -->
             <div class="mb-6">
               <label class="form-label" for="ecommerce-category-image">Attachment</label>
-              <input class="form-control" type="file" id="ecommerce-category-image">
+              <input class="form-control" type="file" id="image_path" name="image_path">
             </div>
             <!-- Parent category -->
-            <div class="mb-6 ecommerce-select2-dropdown">
+            {{-- <div class="mb-6 ecommerce-select2-dropdown">
               <label class="form-label" for="ecommerce-category-parent-category">Parent category</label>
-              <div class="position-relative"><select id="ecommerce-category-parent-category" class="select2 form-select select2-hidden-accessible" data-placeholder="Select parent category" data-select2-id="ecommerce-category-parent-category" tabindex="-1" aria-hidden="true">
+              <div class="position-relative"><select id="parent_id" name="parent_id" class="select2 form-select select2-hidden-accessible" data-placeholder="Select parent category" data-select2-id="ecommerce-category-parent-category" tabindex="-1" aria-hidden="true">
                 <option value="" data-select2-id="2">Select parent Category</option>
                 <option value="Household">Household</option>
                 <option value="Management">Management</option>
@@ -573,21 +599,23 @@
                 <option value="Office">Office</option>
                 <option value="Automotive">Automotive</option>
               </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="1" style="width: 335.2px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-ecommerce-category-parent-category-container"><span class="select2-selection__rendered" id="select2-ecommerce-category-parent-category-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder">Select parent category</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></div>
-            </div>
+            </div> --}}
             <!-- Description -->
             <div class="mb-6">
               <label class="form-label">Description</label>
               <div class="form-control p-0 py-1">
-                <textarea class="form-control" id="ecommerce-product-description" placeholder="Product description" name="productDescription" aria-label="Product description" rows="4"></textarea>
+                <textarea class="form-control" id="description" placeholder="Product description" name="description" aria-label="Product description" rows="4"></textarea>
             </div>
             <!-- Status -->
             <div class="mb-6 ecommerce-select2-dropdown">
               <label class="form-label">Select category status</label>
-              <div class="position-relative"><select id="ecommerce-category-status" class="select2 form-select select2-hidden-accessible" data-placeholder="Select category status" data-select2-id="ecommerce-category-status" tabindex="-1" aria-hidden="true">
-                <option value="" data-select2-id="4">Select category status</option>
-                <option value="Scheduled">Scheduled</option>
-                <option value="Publish">Publish</option>
-                <option value="Inactive">Inactive</option>
+              <div class="position-relative"><select id="status" name="status" class="select2 form-select select2-hidden-accessible" data-placeholder="Select category status" data-select2-id="ecommerce-category-status" tabindex="-1" aria-hidden="true">
+                <option value="" data-select2-id="2">Select parent Category</option>
+                <option value="Household">Household</option>
+                <option value="Management">Management</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Office">Office</option>
+                <option value="Automotive">Automotive</option>
               </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="3" style="width: 335.2px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-ecommerce-category-status-container"><span class="select2-selection__rendered" id="select2-ecommerce-category-status-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder">Select category status</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></div>
             </div>
             <!-- Submit and reset -->
@@ -600,4 +628,32 @@
       </div>
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: '{{ session('success') }}',
+        confirmButtonText: 'OK'
+    });
+</script>
+@endif
+<script>
+function confirmDelete(clientId) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('delete-category-' + clientId).submit();
+        }
+    });
+}
+</script>
 @endsection
