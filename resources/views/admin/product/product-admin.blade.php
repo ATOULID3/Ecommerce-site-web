@@ -79,17 +79,18 @@
       <table class="table">
         <thead class="table-light">
           <tr>
-            <th>product</th>
-            <th>Client</th>
-            <th>Users</th>
-            <th>Status</th>
+            <th>Product</th>
+            <th>Name</th>
+            <th>Clients</th>
+            <th>Price</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody class="table-border-bottom-0">
+            @foreach ( $products as $product )
           <tr>
-            <td><img src="images/item-cart-04.jpg" alt="IMG"></td>
-            <td>Albert Cook</td>
+            <td><img src="{{ asset('product/' . $product->image) }}" alt="IMG" style="width: 60px; height: auto;"></td>
+            <td>{{$product->name}}</td>
             <td>
               <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
                 <li
@@ -121,24 +122,31 @@
                 </li>
               </ul>
             </td>
-            <td><span class="badge bg-label-primary me-1">Active</span></td>
+            <td><span class="badge bg-label-warning me-1">{{$product->price}}DH</span></td>
             <td>
               <div class="dropdown">
                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                   <i class="bx bx-dots-vertical-rounded"></i>
                 </button>
+                <button type="button" class="btn btn-info btn-sm" onclick="showProductDetails({{ $product->id }})">
+                    <i class="bx bx-info-circle"></i>
+                  </button>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="javascript:void(0);"
+                    <a class="dropdown-item" href="javascript:void(0);"
                     ><i class="bx bx-edit-alt me-1"></i> Edit</a
                   >
-                  <a class="dropdown-item" href="javascript:void(0);"
-                    ><i class="bx bx-trash me-1"></i> Delete</a
-                  >
+                  <form id="delete-product-{{ $product->id }}" action="{{ route('products.destroy', $product->id) }}" method="POST" >
+                    @csrf
+                    @method('DELETE')
+                    <button type="button" class="dropdown-item" onclick="confirmDelete('{{ $product->id }}')">
+                        <i class="bx bx-trash me-1"></i> Delete
+                    </button>
+                </form>
                 </div>
               </div>
             </td>
           </tr>
-          <tr>
+          {{-- <tr>
             <td><img src="images/item-cart-05.jpg" alt="IMG"></td>
             <td>Barry Hunter</td>
             <td>
@@ -343,10 +351,114 @@
                 </div>
               </div>
             </td>
-          </tr>
+          </tr> --}}
+          @endforeach
         </tbody>
       </table>
+
+<!-- Modal Structure -->
+<div class="modal fade" id="productDetailModal" tabindex="-1" aria-labelledby="productDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="productDetailModalLabel">Details of <span id="modal-product-title"></span></h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tbody>
+              <tr><td>Product:</td>
+                <td>
+                  <div class="d-flex justify-content-start align-items-center product-name">
+                    <div class="avatar-wrapper">
+                      <div class="avatar avatar me-4 rounded-2 bg-label-secondary">
+                        <img id="modal-product-image" src="" alt="Product Image" class="rounded">
+                      </div>
+                    </div>
+                    <div class="d-flex flex-column">
+                      <h6 class="text-nowrap mb-0" id="modal-product-name"></h6>
+                      <small class="text-truncate d-none d-sm-block" id="modal-product-description"></small>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr><td>Description:</td> <td><span id="modal-product-category"></span></td></tr>
+              <tr><td>Stock:</td>
+                <td>
+                  <span id="modal-product-stock">
+                    <label class="switch switch-primary switch-sm">
+                      <input type="checkbox" class="switch-input" id="modal-product-stock-status" disabled>
+                      <span class="switch-toggle-slider"><span class="switch-off"></span></span>
+                    </label>
+                  </span>
+                </td>
+              </tr>
+              <tr><td>Barcode:</td> <td><span id="modal-product-sku"></span></td></tr>
+              <tr><td>Price:</td> <td><span id="modal-product-price"></span></td></tr>
+              <tr><td>Quantity:</td> <td><span id="modal-product-quantity"></span></td></tr>
+              <tr><td>Collection:</td>
+                <td><span id="modal-product-status" class="badge text-capitalized"></span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
     </div>
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: '{{ session('success') }}',
+        confirmButtonText: 'OK'
+    });
+</script>
+@endif
+<script>
+    function confirmDelete(productId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-product-' + productId).submit();
+            }
+        });
+    }
+    </script>
+    <!-- JavaScript to Populate Modal -->
+<script>
+    function showProductDetails(productId) {
+      const product = @json($products->keyBy('id'))[productId];
+
+      document.getElementById('modal-product-title').textContent = product.name;
+      document.getElementById('modal-product-image').src = "{{ asset('product/') }}/" + product.image;
+      document.getElementById('modal-product-name').textContent = product.name;
+      document.getElementById('modal-product-description').textContent = product.category;
+      document.getElementById('modal-product-category').textContent = product.description;
+      document.getElementById('modal-product-stock-status').checked = product.stock > 0;
+      document.getElementById('modal-product-sku').textContent = product.barcode;
+      document.getElementById('modal-product-price').textContent = product.price + ' DH';
+      document.getElementById('modal-product-quantity').textContent = product.quantity;
+      document.getElementById('modal-product-status').textContent = product.vendor;
+      document.getElementById('modal-product-status').className = `badge bg-label-${product.status.toLowerCase()}`;
+
+      new bootstrap.Modal(document.getElementById('productDetailModal')).show();
+    }
+
+    function editProduct(productId) {
+      // Add logic for editing the product
+      console.log('Edit product:', productId);
+    }
+  </script>
 @endsection

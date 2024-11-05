@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
@@ -89,12 +90,10 @@ Route::get('/Billing', function () {
     return view('admin.settings.Billing');
 });
 // ********************admin-product******************************
-Route::get('/product-admin', function () {
-    return view('admin.product.product-admin');
-});
-Route::get('/add_product', function () {
-    return view('admin.product.add_product');
-});
+Route::get('/product-admin',[ProductController::class,'product'])->name('product');
+Route::get('/add_product',[ProductController::class,'add_product'])->name('product.add');
+Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
+Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 // ********************category******************************
 Route::get('/category',[CategoryController::class,'category'])->name('category');
 Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');

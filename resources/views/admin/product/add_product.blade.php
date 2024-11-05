@@ -12,17 +12,12 @@
       <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-6 row-gap-4">
 
         <div class="d-flex flex-column justify-content-center">
-          <h4 class="mb-1">Add a new Product</h4>
-          <p class="mb-0">Orders placed across your store</p>
-        </div>
-        <div class="d-flex align-content-center flex-wrap gap-4">
-          <div class="d-flex gap-4"><button class="btn btn-label-secondary">Discard</button>
-            <button class="btn btn-label-primary">Save draft</button></div>
-          <button type="submit" class="btn btn-primary">Publish product</button>
+          <h3 class="mb-1">Add a new Product</h3>
         </div>
 
       </div>
-
+      <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
       <div class="row">
 
         <!-- First column-->
@@ -35,39 +30,49 @@
             <div class="card-body">
               <div class="mb-6">
                 <label class="form-label" for="ecommerce-product-name">Name</label>
-                <input type="text" class="form-control" id="ecommerce-product-name" placeholder="Product title" name="productTitle" aria-label="Product title">
+                <input type="text" class="form-control" id="name" placeholder="Product title" name="name" aria-label="Product title">
               </div>
               <div class="row mb-6">
-                <div class="col"><label class="form-label" for="ecommerce-product-sku">SKU</label>
-                  <input type="number" class="form-control" id="ecommerce-product-sku" placeholder="SKU" name="productSku" aria-label="Product SKU"></div>
+                <div class="mb-6 ecommerce-select2-dropdown">
+                    <label class="form-label">Select category status</label>
+                    <div class="position-relative">
+                        <select id="status" name="status" class="select2 form-select" data-placeholder="Select category status">
+                            <option value="">Select parent Category</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category }}">{{ $category->status }}:{{ $category->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
                 <div class="col"><label class="form-label" for="ecommerce-product-barcode">Barcode</label>
-                  <input type="text" class="form-control" id="ecommerce-product-barcode" placeholder="0123-4567" name="productBarcode" aria-label="Product barcode"></div>
+                  <input type="text" class="form-control" id="barcode" placeholder="0123-4567" name="barcode" aria-label="Product barcode"></div>
               </div>
               <!-- Description -->
               <div>
                 <label class="mb-1">Description (Optional)</label>
-                <textarea class="form-control" id="ecommerce-product-description" placeholder="Product description" name="productDescription" aria-label="Product description" rows="4"></textarea>
+                <textarea class="form-control" id="description" placeholder="Product description" name="description" aria-label="Product description" rows="4"></textarea>
               </div>
             </div>
           </div>
+          <br>
           <!-- /Product Information -->
           <!-- Media -->
-          <div class="card mb-6">
-            <div class="card-header d-flex justify-content-between align-items-center">
-              <h5 class="mb-0 card-title">Product Image</h5>
-              <a href="javascript:void(0);" class="fw-medium">Add media from URL</a>
+          <div class="card mb-4 shadow-sm border-light">
+            <div class="card-header d-flex justify-content-between align-items-center bg-light">
+              <h5 class="mb-0 card-title font-weight-bold">Product Image</h5>
+              <a href="javascript:void(0);" class="text-primary fw-medium">Add media from URL</a>
             </div>
-            <div class="card-body">
-              <form action="/upload" class="dropzone needsclick p-0 dz-clickable" id="dropzone-basic">
-                <div class="dz-message needsclick">
-                  <p class="h4 needsclick pt-4 mb-2">Drag and drop your image here</p>
-                  <p class="h6 text-muted d-block fw-normal mb-2">or</p>
-                  <span class="note needsclick btn btn-sm btn-label-primary" id="btnBrowse">Browse image</span>
-                </div>
-
-              </form>
+            <div class="card-body text-center">
+              <!-- Image Upload Section -->
+              <div class="upload-area p-4 border border-dashed rounded bg-light">
+                <p class="h4 pt-3 mb-2">Drag and drop your image here</p>
+                <p class="text-muted mb-3">or</p>
+                <label class="btn btn-primary btn-sm" for="imageUpload">Browse Image</label>
+                <input type="file" id="imageUpload" name="image" accept="image/*" class="d-none">
+              </div>
             </div>
           </div>
+          <br>
           <!-- /Media -->
           <!-- Variants -->
           <div class="card mb-6">
@@ -75,7 +80,6 @@
               <h5 class="card-title mb-0">Variants</h5>
             </div>
             <div class="card-body">
-              <form class="form-repeater">
                 <div data-repeater-list="group-a">
                   <div data-repeater-item="">
                     <div class="row g-6 mb-6">
@@ -88,26 +92,47 @@
                           <option value="color">Color</option>
                           <option value="weight">Weight</option>
                           <option value="smell">Smell</option>
-                        </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="1" style="width: 233.363px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-form-repeater-1-1-container"><span class="select2-selection__rendered" id="select2-form-repeater-1-1-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder">Size</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></div>
+                        </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="1" style="width: 233.363px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-form-repeater-1-1-container"><span class="select2-selection__rendered" id="select2-form-repeater-1-1-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder"></span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></div>
                       </div>
 
                       <div class="col-8">
                         <label class="form-label invisible" for="form-repeater-1-2">Not visible</label>
-                        <input type="number" id="form-repeater-1-2" class="form-control" placeholder="Enter size">
+                        <input type="number" id="size" name="size" class="form-control" placeholder="Enter size">
                       </div>
 
                     </div>
                   </div>
                 </div>
-                <div>
-                  <button class="btn btn-primary" data-repeater-create="">
-                    <i class="bx bx-plus bx-sm me-2"></i>
-                    Add another option
-                  </button>
-                </div>
-              </form>
             </div>
           </div>
+          <div class="card mb-6">
+            <div class="card-body">
+                <div data-repeater-list="group-a">
+                  <div data-repeater-item="">
+                    <div class="row g-6 mb-6">
+
+                      <div class="col-4">
+                        <label class="form-label" for="form-repeater-1-1">Options</label>
+                        <div class="position-relative"><select id="form-repeater-1-1" class="select2 form-select select2-hidden-accessible" data-placeholder="Size" data-select2-id="form-repeater-1-1" tabindex="-1" aria-hidden="true">
+                          <option value="" data-select2-id="2">color</option>
+                          <option value="size">Size</option>
+                          <option value="color">Color</option>
+                          <option value="weight">Weight</option>
+                          <option value="smell">Smell</option>
+                        </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="1" style="width: 233.363px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-form-repeater-1-1-container"><span class="select2-selection__rendered" id="select2-form-repeater-1-1-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder"></span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></div>
+                      </div>
+
+                      <div class="col-8">
+                        <label class="form-label invisible" for="form-repeater-1-2">Not visible</label>
+                        <input type="text" id="color" name="color" class="form-control" placeholder="Enter color">
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <br>
           <!-- /Variants -->
           <!-- Inventory -->
           <div class="card mb-6">
@@ -165,7 +190,7 @@
                       <label class="form-label" for="ecommerce-product-stock">Add to Stock</label>
                       <div class="row mb-4 g-4 pe-md-4">
                         <div class="col-12 col-sm-9">
-                          <input type="number" class="form-control" id="ecommerce-product-stock" placeholder="Quantity" name="quantity" aria-label="Quantity"></div>
+                          <input type="number" class="form-control" id="quantity" placeholder="Quantity" name="quantity" aria-label="Quantity"></div>
                         <div class="col-12 col-sm-3">
                           <button class="btn btn-primary">Confirm</button>
                         </div>
@@ -317,7 +342,7 @@
               <!-- Base Price -->
               <div class="mb-6">
                 <label class="form-label" for="ecommerce-product-price">Base Price</label>
-                <input type="number" class="form-control" id="ecommerce-product-price" placeholder="Price" name="productPrice" aria-label="Product price">
+                <input type="number" class="form-control" id="price" placeholder="Price" name="price" aria-label="Product price">
               </div>
               <!-- Discounted Price -->
               <div class="mb-6">
@@ -342,6 +367,7 @@
               </div>
             </div>
           </div>
+          <br>
           <!-- /Pricing Card -->
           <!-- Organize Card -->
           <div class="card mb-6">
@@ -354,40 +380,23 @@
                 <label class="form-label mb-1" for="vendor">
                   Vendor
                 </label>
-                <div class="position-relative"><select id="vendor" class="select2 form-select select2-hidden-accessible" data-placeholder="Select Vendor" data-select2-id="vendor" tabindex="-1" aria-hidden="true">
+                <div class="position-relative"><select id="vendor" name="vendor" class="select2 form-select select2-hidden-accessible" data-placeholder="Select Vendor" data-select2-id="vendor" tabindex="-1" aria-hidden="true">
                   <option value="" data-select2-id="6">Select Vendor</option>
                   <option value="men-clothing">Men's Clothing</option>
                   <option value="women-clothing">Women's-clothing</option>
                   <option value="kid-clothing">Kid's-clothing</option>
-                </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="5" style="width: 337.062px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-vendor-container"><span class="select2-selection__rendered" id="select2-vendor-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder">Select Vendor</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></div>
-              </div>
-              <!-- Category -->
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="mb-6 col ecommerce-select2-dropdown">
-                  <label class="form-label mb-1" for="category-org">
-                    <span>Category</span>
-                  </label>
-                  <div class="position-relative"><select id="category-org" class="select2 form-select select2-hidden-accessible" data-placeholder="Select Category" data-select2-id="category-org" tabindex="-1" aria-hidden="true">
-                    <option value="" data-select2-id="8">Select Category</option>
-                    <option value="Household">Household</option>
-                    <option value="Management">Management</option>
-                    <option value="Electronics">Electronics</option>
-                    <option value="Office">Office</option>
-                    <option value="Automotive">Automotive</option>
-                  </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="7" style="width: 283.062px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-category-org-container"><span class="select2-selection__rendered" id="select2-category-org-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder">Select Category</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></div>
-                </div>
-                <a href="javascript:void(0);" class="fw-medium btn btn-icon btn-label-primary ms-4"><i class="bx bx-plus bx-md"></i></a>
+                </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="5" style="width: 337.062px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-vendor-container"><span class="select2-selection__rendered" id="select2-vendor-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder"></span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></div>
               </div>
               <!-- Collection -->
               <div class="mb-6 col ecommerce-select2-dropdown">
                 <label class="form-label mb-1" for="collection">Collection
                 </label>
-                <div class="position-relative"><select id="collection" class="select2 form-select select2-hidden-accessible" data-placeholder="Collection" data-select2-id="collection" tabindex="-1" aria-hidden="true">
+                <div class="position-relative"><select id="collection" name="collection" class="select2 form-select select2-hidden-accessible" data-placeholder="Collection" data-select2-id="collection" tabindex="-1" aria-hidden="true">
                   <option value="" data-select2-id="10">Collection</option>
                   <option value="men-clothing">Men's Clothing</option>
                   <option value="women-clothing">Women's-clothing</option>
                   <option value="kid-clothing">Kid's-clothing</option>
-                </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="9" style="width: 337.062px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-collection-container"><span class="select2-selection__rendered" id="select2-collection-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder">Collection</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></div>
+                </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="9" style="width: 337.062px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-collection-container"><span class="select2-selection__rendered" id="select2-collection-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder"></span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></div>
               </div>
               <!-- Status -->
               <div class="mb-6 col ecommerce-select2-dropdown">
@@ -398,7 +407,7 @@
                   <option value="Published">Published</option>
                   <option value="Scheduled">Scheduled</option>
                   <option value="Inactive">Inactive</option>
-                </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="11" style="width: 337.062px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-status-org-container"><span class="select2-selection__rendered" id="select2-status-org-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder">Published</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></div>
+                </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="11" style="width: 337.062px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-status-org-container"><span class="select2-selection__rendered" id="select2-status-org-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder"></span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></div>
               </div>
               <!-- Tags -->
               <div>
@@ -410,10 +419,60 @@
               </div>
             </div>
           </div>
+          <br>
+          <button type="submit" class="btn btn-primary">Publish product</button>
+          <a href="/product-admin" class="btn btn-danger">Go Back</a>
           <!-- /Organize Card -->
         </div>
         <!-- /Second column -->
       </div>
+    </form>
     </div>
-              </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: '{{ session('success') }}',
+        confirmButtonText: 'OK'
+    });
+</script>
+@endif
+<script>
+function confirmDelete(clientId) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('delete-category-' + clientId).submit();
+        }
+    });
+}
+</script>
+@if ($errors->any())
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    let errorMessages = `
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+    `;
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops... Something went wrong!',
+        html: errorMessages,
+        confirmButtonText: 'OK'
+    });
+</script>
+@endif
 @endsection
