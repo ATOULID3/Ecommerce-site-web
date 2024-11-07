@@ -8,9 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
-
-
-
+use App\Http\Controllers\OrderController;
 
 // ********************home******************************
 Route::get('/', function () {
@@ -99,12 +97,11 @@ Route::get('/category',[CategoryController::class,'category'])->name('category')
 Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
 Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 // ********************Order******************************
-Route::get('/order', function () {
-    return view('admin.order.order');
-});
-Route::get('/order_detail', function () {
-    return view('admin.order.order_detail');
-});
+Route::get('/order',[OrderController::class,'order'])->name('order');
+Route::get('/add_order',[OrderController::class,'add_order'])->name('add.order');
+Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');
+Route::get('/order_detail/{id}',[OrderController::class,'order_detail'])->name('detail.order');
+Route::delete('order/{order}', [OrderController::class, 'destroy'])->name('order.destroy');
 // ********************logistics******************************
 Route::get('/logistics', function () {
     return view('admin.logistics.logistics');

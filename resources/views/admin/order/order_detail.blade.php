@@ -15,53 +15,127 @@
 
   <div class="d-flex flex-column justify-content-center">
     <div class="mb-1">
-      <span class="h5">Order #32543 </span><span class="badge bg-label-success me-1 ms-2">Paid</span> <span class="badge bg-label-info">Ready to Pickup</span>
+      <span class="h5">Order #{{ $order->id }} </span><span class="badge bg-label-success me-1 ms-2">Paid</span> <span class="badge bg-label-info">{{ $order->status }}</span>
     </div>
-    <p class="mb-0">Aug 17, <span id="orderYear">2024</span>, 5:48 (ET)</p>
+    <p class="mb-0">{{ $order->created_at }}</p>
   </div>
   <div class="d-flex align-content-center flex-wrap gap-2">
-    <button class="btn btn-danger delete-order">Delete Order</button>
+    <form id="delete-order-{{ $order->id }}" action="{{ route('order.destroy', $order->id) }}" method="POST" >
+        @csrf
+      @method('DELETE')
+      <button type="submit" class="btn btn-danger"onclick="confirmDelete('{{ $order->id }}')">Delete Order</button>
+    </form>
   </div>
 </div>
 
 <!-- Order Details Table -->
 
 <div class="row">
-  <div class="col-12 col-lg-8">
-    <div class="card mb-6">
-      <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="card-title m-0">Order details</h5>
-        <h6 class="m-0"><a href=" javascript:void(0)">Edit</a></h6>
-      </div>
-      <div class="card-datatable table-responsive">
-        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer"><table class="datatables-order-details table border-top dataTable no-footer dtr-column" id="DataTables_Table_0" style="width: 798px;">
-          <thead>
-            <tr><th class="control sorting_disabled dtr-hidden" rowspan="1" colspan="1" style="width: 0px; display: none;" aria-label=""></th><th class="sorting_disabled dt-checkboxes-cell dt-checkboxes-select-all" rowspan="1" colspan="1" style="width: 18px;" data-col="1" aria-label=""><input type="checkbox" class="form-check-input"></th><th class="w-50 sorting_disabled" rowspan="1" colspan="1" style="width: 299px;" aria-label="products">products</th><th class="w-25 sorting_disabled" rowspan="1" colspan="1" style="width: 126px;" aria-label="price">price</th><th class="w-25 sorting_disabled" rowspan="1" colspan="1" style="width: 117px;" aria-label="qty">qty</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 42px;" aria-label="total">total</th></tr>
-          </thead><tbody><tr class="odd"><td class="  control" tabindex="0" style="display: none;"></td><td class="  dt-checkboxes-cell"><input type="checkbox" class="dt-checkboxes form-check-input"></td><td class="sorting_1"><div class="d-flex justify-content-start align-items-center text-nowrap"><div class="avatar-wrapper"><div class="avatar avatar-sm me-3"><img src="images/item-cart-04.jpg" alt="product-Wooden Chair" class="rounded-2"></div></div><div class="d-flex flex-column"><h6 class="text-heading mb-0">Wooden Chair</h6><small>Material: Wooden</small></div></div></td><td><span>$841</span></td><td><span class="text-body">2</span></td><td><span class="text-body">1682</span></td></tr><tr class="even"><td class="  control" tabindex="0" style="display: none;"></td><td class="  dt-checkboxes-cell"><input type="checkbox" class="dt-checkboxes form-check-input"></td><td class="sorting_1"><div class="d-flex justify-content-start align-items-center text-nowrap"><div class="avatar-wrapper"><div class="avatar avatar-sm me-3"><img src="images/item-cart-04.jpg" alt="product-Oneplus 10" class="rounded-2"></div></div><div class="d-flex flex-column"><h6 class="text-heading mb-0">Oneplus 10</h6><small>Storage:128gb</small></div></div></td><td><span>$896</span></td><td><span class="text-body">3</span></td><td><span class="text-body">2688</span></td></tr><tr class="odd"><td class="  control" tabindex="0" style="display: none;"></td><td class="  dt-checkboxes-cell"><input type="checkbox" class="dt-checkboxes form-check-input"></td><td class="sorting_1"><div class="d-flex justify-content-start align-items-center text-nowrap"><div class="avatar-wrapper"><div class="avatar avatar-sm me-3"><img src="images/item-cart-04.jpg" alt="product-Nike Jordan" class="rounded-2"></div></div><div class="d-flex flex-column"><h6 class="text-heading mb-0">Nike Jordan</h6><small>Size:8UK</small></div></div></td><td><span>$392</span></td><td><span class="text-body">1</span></td><td><span class="text-body">392</span></td></tr><tr class="even"><td class="  control" tabindex="0" style="display: none;"></td><td class="  dt-checkboxes-cell"><input type="checkbox" class="dt-checkboxes form-check-input"></td><td class="sorting_1"><div class="d-flex justify-content-start align-items-center text-nowrap"><div class="avatar-wrapper"><div class="avatar avatar-sm me-3"><img src="images/item-cart-04.jpg" alt="product-Face cream" class="rounded-2"></div></div><div class="d-flex flex-column"><h6 class="text-heading mb-0">Face cream</h6><small>Gender:Women</small></div></div></td><td><span>$813</span></td><td><span class="text-body">2</span></td><td><span class="text-body">1626</span></td></tr></tbody>
-        </table><div style="width: 1%;"></div></div>
-        <div class="d-flex justify-content-end align-items-center m-6 mb-2">
-          <div class="order-calculations">
-            <div class="d-flex justify-content-start mb-2">
-              <span class="w-px-100 text-heading">Subtotal:</span>
-              <h6 class="mb-0">$2093</h6>
+    <div class="col-12 col-lg-8">
+        <div class="card mb-6">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="card-title m-0">Order Details</h5>
+            <h6 class="m-0"><a href="javascript:void(0)" class="text-primary">Edit</a></h6>
+          </div>
+          <div class="card-body">
+            <!-- Order Items List -->
+            <div class="order-item">
+              <div class="d-flex justify-content-start align-items-center">
+                <div class="avatar-wrapper me-3">
+                  <div class="avatar avatar-sm">
+                    <img src="{{ asset('images/item-cart-04.jpg') }}" alt="Wooden Chair" class="rounded-2">
+                  </div>
+                </div>
+                <div class="d-flex flex-column">
+                  <h6 class="text-heading mb-0">Wooden Chair</h6>
+                  <small>Material: Wooden</small>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between">
+                <span>$841</span>
+                <span class="text-body">2</span>
+                <span class="text-body">$1682</span>
+              </div>
             </div>
-            <div class="d-flex justify-content-start mb-2">
-              <span class="w-px-100 text-heading">Discount:</span>
-              <h6 class="mb-0">$2</h6>
+            <div class="order-item">
+              <div class="d-flex justify-content-start align-items-center">
+                <div class="avatar-wrapper me-3">
+                  <div class="avatar avatar-sm">
+                    <img src="{{ asset('images/item-cart-04.jpg') }}" alt="Oneplus 10" class="rounded-2">
+                  </div>
+                </div>
+                <div class="d-flex flex-column">
+                  <h6 class="text-heading mb-0">Oneplus 10</h6>
+                  <small>Storage: 128GB</small>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between">
+                <span>$896</span>
+                <span class="text-body">3</span>
+                <span class="text-body">$2688</span>
+              </div>
             </div>
-            <div class="d-flex justify-content-start mb-2">
-              <span class="w-px-100 text-heading">Tax:</span>
-              <h6 class="mb-0">$28</h6>
+            <div class="order-item">
+              <div class="d-flex justify-content-start align-items-center">
+                <div class="avatar-wrapper me-3">
+                  <div class="avatar avatar-sm">
+                    <img src="{{ asset('images/item-cart-04.jpg') }}" alt="Nike Jordan" class="rounded-2">
+                  </div>
+                </div>
+                <div class="d-flex flex-column">
+                  <h6 class="text-heading mb-0">Nike Jordan</h6>
+                  <small>Size: 8UK</small>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between">
+                <span>$392</span>
+                <span class="text-body">1</span>
+                <span class="text-body">$392</span>
+              </div>
             </div>
-            <div class="d-flex justify-content-start">
-              <h6 class="w-px-100 mb-0">Total:</h6>
-              <h6 class="mb-0">$2113</h6>
+            <div class="order-item">
+              <div class="d-flex justify-content-start align-items-center">
+                <div class="avatar-wrapper me-3">
+                  <div class="avatar avatar-sm">
+                    <img src="{{ asset('images/item-cart-04.jpg') }}" alt="Face Cream" class="rounded-2">
+                  </div>
+                </div>
+                <div class="d-flex flex-column">
+                  <h6 class="text-heading mb-0">Face Cream</h6>
+                  <small>Gender: Women</small>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between">
+                <span>$813</span>
+                <span class="text-body">2</span>
+                <span class="text-body">$1626</span>
+              </div>
+            </div>
+
+            <!-- Order Calculations Section -->
+            <div class="d-flex justify-content-end align-items-center mt-4 mb-2">
+              <div class="order-calculations">
+                <div class="d-flex justify-content-start mb-2">
+                  <span class="w-px-100 text-heading">Subtotal:</span>
+                  <h6 class="mb-0">$2093</h6>
+                </div>
+                <div class="d-flex justify-content-start mb-2">
+                  <span class="w-px-100 text-heading">Discount:</span>
+                  <h6 class="mb-0">-$2</h6>
+                </div>
+                <div class="d-flex justify-content-start mb-2">
+                  <span class="w-px-100 text-heading">Tax:</span>
+                  <h6 class="mb-0">$28</h6>
+                </div>
+                <div class="d-flex justify-content-start">
+                  <h6 class="w-px-100 mb-0">Total:</h6>
+                  <h6 class="mb-0 text-success">$2113</h6>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
   <div class="col-12 col-lg-4">
     <div class="card mb-6">
       <div class="card-header">
@@ -74,9 +148,9 @@
           </div>
           <div class="d-flex flex-column">
             <a href="app-user-view-account.html" class="text-body text-nowrap">
-              <h6 class="mb-0">Shamus Tuttle</h6>
+              <h6 class="mb-0">{{ $order->customer_name }}</h6>
             </a>
-            <span>Customer ID: #58909</span></div>
+            <span>Customer ID: #{{ $order->product_id }}</span></div>
         </div>
         <div class="d-flex justify-content-start align-items-center mb-6">
           <span class="avatar rounded-circle bg-label-success me-3 d-flex align-items-center justify-content-center"><i class="bx bx-cart bx-lg"></i></span>
@@ -86,22 +160,11 @@
           <h6 class="mb-1">Contact info</h6>
           <h6 class="mb-1"><a href=" javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editUser">Edit</a></h6>
         </div>
-        <p class=" mb-1">Email: Shamus889@yahoo.com</p>
+        <p class=" mb-1">Email: {{ $order->customer_email }}</p>
         <p class=" mb-0">Mobile: +1 (609) 972-22-22</p>
       </div>
     </div>
-
-    <div class="card mb-6">
-
-      <div class="card-header d-flex justify-content-between">
-        <h5 class="card-title m-0">Shipping address</h5>
-        <h6 class="m-0"><a href=" javascript:void(0)" data-bs-toggle="modal" data-bs-target="#addNewAddress">Edit</a></h6>
-      </div>
-      <div class="card-body">
-        <p class="mb-0">45 Roker Terrace <br>Latheronwheel <br>KW5 8NW,London <br>UK</p>
-      </div>
-
-    </div>
+    <br>
     <div class="card mb-6">
       <div class="card-header d-flex justify-content-between pb-2">
         <h5 class="card-title m-0">Billing address</h5>
@@ -352,4 +415,22 @@
           <div class="content-backdrop fade"></div>
         </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDelete(productId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-order-' + productId).submit();
+            }
+        });
+    }
+    </script>
 @endsection
