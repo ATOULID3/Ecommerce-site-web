@@ -223,11 +223,6 @@
                           <div data-i18n="Without menu">Add Order</div>
                         </a>
                       </li>
-                    <li class="menu-item">
-                      <a href="/order_detail" class="menu-link">
-                        <div data-i18n="Without navbar">Order Details</div>
-                      </a>
-                    </li>
                   </ul>
                 </li>
                 <!-- Logistics -->

@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\LogisticController;
 use App\Http\Controllers\OrderController;
 
 // ********************home******************************
@@ -103,12 +104,9 @@ Route::post('/order/store', [OrderController::class, 'store'])->name('order.stor
 Route::get('/order_detail/{id}',[OrderController::class,'order_detail'])->name('detail.order');
 Route::delete('order/{order}', [OrderController::class, 'destroy'])->name('order.destroy');
 // ********************logistics******************************
-Route::get('/logistics', function () {
-    return view('admin.logistics.logistics');
-});
-Route::get('/dash_logi', function () {
-    return view('admin.logistics.dashlogi');
-});
+Route::get('/logistics',[LogisticController::class,'logistics'])->name('logistics');
+Route::get('/dash_logi',[LogisticController::class,'dash_logistics'])->name('dash.logistics');
+Route::get('/order/{id}/track', [LogisticController::class, 'show'])->name('order.track');
 // ********************clients******************************
 Route::get('/clients',[ClientController::class,'client'])->name('clients');
 Route::get('/add_client',[ClientController::class,'add_client'])->name('add_client');
