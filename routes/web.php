@@ -2,14 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LogisticController;
+use App\Http\Controllers\Product1Controller;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\LogisticController;
-use App\Http\Controllers\OrderController;
 
 // ********************home******************************
 Route::get('/', function () {
@@ -23,13 +24,8 @@ Route::get('/home-03', function () {
 });
 
 // ********************product******************************
-Route::get('/product', function () {
-    return view('products.product');
-});
-Route::get('/product-detail', function () {
-    return view('products.product-detail');
-});
-
+Route::get('/product1',[Product1Controller::class,'product1'])->name('product1');
+Route::get('/product-detail/{id}',[Product1Controller::class,'detail_product'])->name('product1_detail');
 // ********************shoping******************************
 Route::get('/shoping-cart', function () {
     return view('shoping.shoping-cart');

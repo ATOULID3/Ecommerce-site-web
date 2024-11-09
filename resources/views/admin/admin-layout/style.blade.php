@@ -138,14 +138,14 @@
 
               <ul class="menu-inner py-1">
                 <!-- Dashboard -->
-                <li class="menu-item active">
+                <li class="menu-item {{ request()->is('index-admin') ? 'active' : '' }}">
                   <a href="/index-admin" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-home-circle"></i>
                     <div data-i18n="Analytics">Dashboard</div>
                   </a>
                 </li>
                  <!-- DashboardEcommerce -->
-                <li class="menu-item ">
+                <li class="menu-item {{ request()->is('Ecommerce_dash') ? 'active' : '' }}">
                     <a href="/Ecommerce_dash" class="menu-link">
                            <i class="menu-icon tf-icons bx bx-home"></i>
                         <div data-i18n="Analytics">Ecommerce Dashboard</div>
@@ -155,19 +155,19 @@
                 <li class="menu-header small text-uppercase">
                     <span class="menu-header-text">Clients</span>
                   </li>
-                  <li class="menu-item">
+                  <li class="menu-item {{ request()->is('clients') || request()->is('add_client') ? 'active' : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-user"></i>
                       <div data-i18n="Layouts">Clients</div>
                     </a>
 
                     <ul class="menu-sub">
-                      <li class="menu-item">
+                      <li class="menu-item {{ request()->is('clients') ? 'active' : '' }}">
                         <a href="/clients" class="menu-link">
                           <div data-i18n="Without menu">Clients</div>
                         </a>
                       </li>
-                      <li class="menu-item">
+                      <li class="menu-item {{ request()->is('add_client') ? 'active' : '' }}">
                         <a href="/add_client" class="menu-link">
                           <div data-i18n="Without menu">Add client</div>
                         </a>
@@ -179,26 +179,26 @@
                     <span class="menu-header-text">Products</span>
                   </li>
                 <!-- category -->
-                <li class="menu-item">
+                <li class="menu-item {{ request()->is('category') ? 'active' : '' }}">
                     <a href="/category" class="menu-link">
                       <i class="menu-icon tf-icons bx bx-category"></i>
                       <div data-i18n="Analytics">Category</div>
                     </a>
                   </li>
                  <!-- product -->
-                 <li class="menu-item">
+                 <li class="menu-item {{ request()->is('product-admin') || request()->is('add_product') ? 'active' : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-shopping-bag"></i>
                       <div data-i18n="Layouts">Products</div>
                     </a>
 
                     <ul class="menu-sub">
-                      <li class="menu-item">
+                      <li class="menu-item {{ request()->is('product-admin') ? 'active' : '' }}">
                         <a href="/product-admin" class="menu-link">
                           <div data-i18n="Without menu">Product</div>
                         </a>
                       </li>
-                      <li class="menu-item">
+                      <li class="menu-item {{ request()->is('add_product') ? 'active' : '' }}">
                         <a href="/add_product" class="menu-link">
                           <div data-i18n="Without menu">Add Product</div>
                         </a>
@@ -206,19 +206,19 @@
                     </ul>
                   </li>
                 <!-- oreders -->
-                <li class="menu-item">
+                <li class="menu-item {{ request()->is('order') || request()->is('add_order') ? 'active' : '' }}">
                   <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-layout"></i>
                     <div data-i18n="Layouts">Order</div>
                   </a>
 
                   <ul class="menu-sub">
-                    <li class="menu-item">
+                    <li class="menu-item {{ request()->is('order') ? 'active' : '' }}">
                       <a href="/order" class="menu-link">
                         <div data-i18n="Without menu">Order list</div>
                       </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ request()->is('add_order') ? 'active' : '' }}">
                         <a href="/add_order" class="menu-link">
                           <div data-i18n="Without menu">Add Order</div>
                         </a>
@@ -226,19 +226,19 @@
                   </ul>
                 </li>
                 <!-- Logistics -->
-                <li class="menu-item">
+                <li class="menu-item {{ request()->is('dash_logi') || request()->is('logistics') ? 'active' : '' }}">
                   <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-car"></i>
                     <div data-i18n="Layouts">Logistics</div>
                   </a>
 
                   <ul class="menu-sub">
-                    <li class="menu-item">
+                    <li class="menu-item {{ request()->is('dash_logi') ? 'active' : '' }}">
                       <a href="/dash_logi" class="menu-link">
                         <div data-i18n="Without menu">dash logistics</div>
                       </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ request()->is('logistics') ? 'active' : '' }}">
                       <a href="/logistics" class="menu-link">
                         <div data-i18n="Without navbar">list logistics</div>
                       </a>
