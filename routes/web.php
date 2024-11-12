@@ -11,6 +11,7 @@ use App\Http\Controllers\Product1Controller;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\InvoicesController;
 
 // ********************home******************************
 Route::get('/', function () {
@@ -108,6 +109,13 @@ Route::get('/clients',[ClientController::class,'client'])->name('clients');
 Route::get('/add_client',[ClientController::class,'add_client'])->name('add_client');
 Route::post('/store',[ClientController::class,'store'])->name('store');
 Route::delete('/client/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
+// ********************invoices******************************
+Route::get('/invoices',[InvoicesController::class,'invoices'])->name('invoices');
+Route::get('/add_invoice',[InvoicesController::class,'add_invoice'])->name('invoice.add');
+Route::post('/store',[InvoicesController::class,'store'])->name('invoices.store');
+Route::get('/show_invoice/{id}',[InvoicesController::class,'show_invoice'])->name('show.invoice');
+Route::get('/invoices/{id}/pdf', [InvoicesController::class, 'downloadPDF'])->name('invoices.downloadPDF');
+Route::delete('invoice/{invoice}', [InvoicesController::class, 'destroy'])->name('invoice.destroy');
 // ********************emails******************************
 Route::get('/emails', function () {
     return view('admin.emails.emails');

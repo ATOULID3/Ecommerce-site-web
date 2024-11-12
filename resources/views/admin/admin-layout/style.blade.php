@@ -245,6 +245,30 @@
                     </li>
                   </ul>
                 </li>
+                <!-- invoice -->
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">Invoice</span>
+                  </li>
+
+                 <li class="menu-item {{ request()->is('invoices') || request()->is('add_invoice') ? 'active' : '' }}">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons bx bx-receipt"></i>
+                      <div data-i18n="Layouts">Invoice</div>
+                    </a>
+
+                    <ul class="menu-sub">
+                      <li class="menu-item {{ request()->is('invoices') ? 'active' : '' }}">
+                        <a href="/invoices" class="menu-link">
+                          <div data-i18n="Without menu">Invoices</div>
+                        </a>
+                      </li>
+                      <li class="menu-item {{ request()->is('add_invoice') ? 'active' : '' }}">
+                        <a href="/add_invoice" class="menu-link">
+                          <div data-i18n="Without menu">Add Invoice</div>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
                 <!-- pages -->
                 {{-- <li class="menu-header small text-uppercase">
                   <span class="menu-header-text">Pages</span>
