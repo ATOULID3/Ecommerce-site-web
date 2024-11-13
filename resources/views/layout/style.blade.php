@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->
-        <link rel="icon" type="image/png" href="{{ asset('images/icons/favicon.png') }}"/>
+        <link rel="icon" type="image/png" href="{{ asset('images/icons/274763268_680404692998477_6439814936089119377_n.jpg') }}"/>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
@@ -83,7 +83,8 @@
 
 				<!-- Logo desktop -->
 				<a href="/" class="logo">
-					<img src="{{ asset('images/icons/logo-01.png') }}" alt="IMG-LOGO">
+                    <img src="{{ asset('images/icons/274763268_680404692998477_6439814936089119377_n.jpg') }}" alt="IMG-LOGO">
+                    <h1 style="color: #04090b; font-size: 36px; font-weight: bold; text-align: center;">Amine Store</h1>
 				</a>
 
 				<!-- Menu desktop -->
@@ -93,8 +94,7 @@
 							<a href="/">Home</a>
 							<ul class="sub-menu">
 								<li><a href="/">Homepage 1</a></li>
-								<li><a href="/home-02">Homepage 2</a></li>
-								<li><a href="/home-03">Homepage 3</a></li>
+								<li><a href="/home-03">Homepage 2</a></li>
 							</ul>
 						</li>
 
@@ -130,7 +130,7 @@
 						<i class="zmdi zmdi-shopping-cart"></i>
 					</div>
 
-					<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+					<a href="/shoping-cart" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
 						<i class="zmdi zmdi-favorite-outline"></i>
 					</a>
 				</div>
@@ -142,7 +142,7 @@
 	<div class="wrap-header-mobile">
 		<!-- Logo moblie -->
 		<div class="logo-mobile">
-			<a href="/"><img src="{{ asset('images/icons/logo-01.png') }}" alt="IMG-LOGO"></a>
+			<a href="/"><img src="{{ asset('images/icons/274763268_680404692998477_6439814936089119377_n.jpg') }}" alt="IMG-LOGO"></a>
 		</div>
 
 		<!-- Icon header -->
@@ -183,7 +183,7 @@
 						Help & FAQs
 					</a>
 
-					<a href="#" class="flex-c-m p-lr-10 trans-04">
+					<a href="/login" class="flex-c-m p-lr-10 trans-04">
 						My Account
 					</a>
 
@@ -203,8 +203,7 @@
 				<a href="/">Home</a>
 				<ul class="sub-menu-m">
 					<li><a href="/">Homepage 1</a></li>
-					<li><a href="/home-02">Homepage 2</a></li>
-					<li><a href="/home-03">Homepage 3</a></li>
+					<li><a href="/home-03">Homepage 2</a></li>
 				</ul>
 				<span class="arrow-main-menu-m">
 					<i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -212,7 +211,7 @@
 			</li>
 
 			<li>
-				<a href="/product">Shop</a>
+				<a href="/product1">Shop</a>
 			</li>
 
 			<li>
@@ -756,6 +755,21 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 <!-- Main JS -->
 <script src="{{ asset('js/main.js') }}"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const currentLocation = window.location.pathname;
+        const menuItems = document.querySelectorAll(".main-menu li");
+
+        menuItems.forEach(item => {
+            const link = item.querySelector("a");
+            if (link && link.getAttribute("href") === currentLocation) {
+                item.classList.add("active-menu");
+            } else {
+                item.classList.remove("active-menu");
+            }
+        });
+    });
+</script>
 
 
 </body>
