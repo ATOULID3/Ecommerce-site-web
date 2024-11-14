@@ -5,7 +5,7 @@
 @section('contentt')
 <div class="container-xxl flex-grow-1 container-p-y">
                 <!-- Input Sizing -->
-                <form id="client-form" action="{{ route('store') }}" method="POST">
+                <form id="client-form" action="{{ route('store.clients') }}" method="POST">
                     @csrf
                 <div class="col-md-14">
                     <div class="card mb-4">

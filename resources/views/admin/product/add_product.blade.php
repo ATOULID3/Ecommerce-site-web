@@ -393,9 +393,12 @@
                 </label>
                 <div class="position-relative"><select id="collection" name="collection" class="select2 form-select select2-hidden-accessible" data-placeholder="Collection" data-select2-id="collection" tabindex="-1" aria-hidden="true">
                   <option value="" data-select2-id="10">Collection</option>
-                  <option value="men-clothing">Men's Clothing</option>
-                  <option value="women-clothing">Women's-clothing</option>
-                  <option value="kid-clothing">Kid's-clothing</option>
+                  <option value="men">Men's Clothing</option>
+                  <option value="women">Women's-clothing</option>
+                  <option value="kid">Kid's-clothing</option>
+                  <option value="bag">Bag</option>
+                  <option value="shoes">Shoes</option>
+                  <option value="watches">Watches</option>
                 </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="9" style="width: 337.062px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-collection-container"><span class="select2-selection__rendered" id="select2-collection-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder"></span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></div>
               </div>
               <!-- Status -->

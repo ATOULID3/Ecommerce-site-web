@@ -78,18 +78,19 @@
                     </a>
 
 					<!-- Menu desktop -->
-					<div class="menu-desktop">
-						<ul class="main-menu">
-							<a href="/">Home</a>
-							<ul class="sub-menu">
-								<li><a href="/">Homepage 1</a></li>
-								<li><a href="/home-03">Homepage 2</a></li>
-							</ul>
-						</li>
+                    <div class="menu-desktop">
+                        <ul class="main-menu">
+                            <li class="active-menu">
+                                <a href="/">Home</a>
+                                <ul class="sub-menu">
+                                    <li><a href="/">Homepage 1</a></li>
+                                    <li><a href="/home-03">Homepage 2</a></li>
+                                </ul>
+                            </li>
 
-							<li class="active-menu">
-								<a href="/product1">Shop</a>
-							</li>
+                            <li>
+                                <a href="/product1">Shop</a>
+                            </li>
 
 							<li class="label1" data-label1="hot">
 								<a href="/shoping-cart">Features</a>
@@ -572,7 +573,7 @@
 
 			<div class="row isotope-grid">
                 @foreach ($products as $product)
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{$product->collection}}">
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">
@@ -1504,6 +1505,23 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
+<!-- Main JS -->
+<script src="{{ asset('js/main.js') }}"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const currentLocation = window.location.pathname;
+        const menuItems = document.querySelectorAll(".main-menu li");
+
+        menuItems.forEach(item => {
+            const link = item.querySelector("a");
+            if (link && link.getAttribute("href") === currentLocation) {
+                item.classList.add("active-menu");
+            } else {
+                item.classList.remove("active-menu");
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

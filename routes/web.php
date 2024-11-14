@@ -107,7 +107,7 @@ Route::get('/order/{id}/track', [LogisticController::class, 'show'])->name('orde
 // ********************clients******************************
 Route::get('/clients',[ClientController::class,'client'])->name('clients');
 Route::get('/add_client',[ClientController::class,'add_client'])->name('add_client');
-Route::post('/store',[ClientController::class,'store'])->name('store');
+Route::post('/store/clients',[ClientController::class,'store'])->name('store.clients');
 Route::delete('/client/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
 // ********************invoices******************************
 Route::get('/invoices',[InvoicesController::class,'invoices'])->name('invoices');
