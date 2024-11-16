@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 class ClientController extends Controller
 {
     public function client(){
+        $clientCount = Client::count(); // Total number of clients
         $clients = Client::paginate(10);  // Limite à 10 clients par page
-        return view('admin.clients.client',compact('clients'));
+        return view('admin.clients.client',compact('clients','clientCount'));
     }
     public function add_client(){
         return view('admin.clients.add_client');

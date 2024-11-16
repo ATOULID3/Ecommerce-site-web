@@ -5,13 +5,14 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\LogisticController;
 use App\Http\Controllers\Product1Controller;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\InvoicesController;
 
 // ********************home******************************
 Route::get('/', function () {
@@ -65,19 +66,13 @@ Route::middleware('auth')->group(function(){
 Route::get('/index-admin', function () {
     return view('admin.admin-layout.dashbord');
 });
-Route::get('//Ecommerce_dash', function () {
-    return view('admin.admin-layout.ecomdash');
-});
+// Route::get('//Ecommerce_dash', function () {
+//     return view('admin.admin-layout.ecomdash');
+// });
 // ********************profile******************************
-Route::get('/profile', function () {
-    return view('admin.profile.profile');
-});
-Route::get('/notification', function () {
-    return view('admin.profile.notification');
-});
-Route::get('/connections', function () {
-    return view('admin.profile.connections');
-});
+Route::get('/profile',[ProfileController::class,'profile'])->name('profile');
+Route::get('/connections',[ProfileController::class,'connections'])->name('connections');
+Route::get('/notification',[ProfileController::class,'notification'])->name('notification');
 // ********************settings******************************
 Route::get('/settings', function () {
     return view('admin.settings.settings');

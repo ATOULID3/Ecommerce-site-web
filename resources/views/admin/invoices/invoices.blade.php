@@ -11,7 +11,7 @@
               <div class="col-sm-6 col-lg-3">
                 <div class="d-flex justify-content-between align-items-center card-widget-1 border-end pb-4 pb-sm-0">
                   <div>
-                    <h4 class="mb-0">24</h4>
+                    <h4 class="mb-0">{{$clientCount}}</h4>
                     <p class="mb-0">Clients</p>
                   </div>
                   <div class="avatar me-sm-6">
@@ -25,7 +25,7 @@
               <div class="col-sm-6 col-lg-3">
                 <div class="d-flex justify-content-between align-items-center card-widget-2 border-end pb-4 pb-sm-0">
                   <div>
-                    <h4 class="mb-0">165</h4>
+                    <h4 class="mb-0">{{$invoiceCount}}</h4>
                     <p class="mb-0">Invoices</p>
                   </div>
                   <div class="avatar me-lg-6">

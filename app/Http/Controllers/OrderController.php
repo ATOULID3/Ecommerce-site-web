@@ -10,8 +10,10 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     public function order(){
-        $orders=Order::all();
-        return view('admin.order.order',compact('orders'));
+        $orderCount=Order::count();
+        $clientCount=Client::count();
+        $orders=Order::with('product')->get();
+        return view('admin.order.order',compact('orders','orderCount','clientCount'));
     }
     public function add_order(){
         $products=Product::all();

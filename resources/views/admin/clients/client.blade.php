@@ -4,6 +4,89 @@
 @endsection
 @section('contentt')
 <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+        <div class="col-lg-3 col-sm-6 mb-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div class="card-info">
+                  <p class="text-heading mb-1">Session</p>
+                  <div class="d-flex align-items-center mb-1">
+                    <h4 class="card-title mb-0 me-2">58,352</h4>
+                    <span class="text-success">(+29%)</span>
+                  </div>
+                </div>
+                <div class="card-icon">
+                  <span class="badge bg-label-primary rounded p-2">
+                    <i class="bx bx-trending-up bx-lg"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 mb-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div class="card-info">
+                  <p class="text-heading mb-1">Time On Site</p>
+                  <div class="d-flex align-items-center mb-1">
+                    <h4 class="card-title mb-0 me-2">28m</h4>
+                    <span class="text-success">(+18%)</span>
+                  </div>
+                </div>
+                <div class="card-icon">
+                  <span class="badge bg-label-info rounded p-2">
+                    <i class="bx bx-time-five bx-lg"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 mb-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div class="card-info">
+                  <p class="text-heading mb-1">Bounce Rate</p>
+                  <div class="d-flex align-items-center mb-1">
+                    <h4 class="card-title mb-0 me-2">62%</h4>
+                    <span class="text-danger">(-14%)</span>
+                  </div>
+                </div>
+                <div class="card-icon">
+                  <span class="badge bg-label-danger rounded p-2">
+                    <i class="bx bx-pie-chart-alt bx-lg"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 mb-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div class="card-info">
+                  <p class="text-heading mb-1">Clients</p>
+                  <div class="d-flex align-items-center mb-1">
+                    <h4 class="card-title mb-0 me-2">{{$clientCount}}</h4>
+                    <span class="text-success">(+42%)</span>
+                  </div>
+                </div>
+                <div class="card-icon">
+                  <span class="badge bg-label-success rounded p-2">
+                    <i class="bx bx-user bx-lg"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
               <!-- Basic Bootstrap Table -->
               <div class="card">
                 <h5 class="card-header">Clients</h5>

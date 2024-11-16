@@ -68,13 +68,13 @@
                     type="text"
                     id="firstName"
                     name="firstName"
-                    value="John"
+                    value="{{  auth()->user()->name  }}"
                     autofocus
                   />
                 </div>
                 <div class="mb-3 col-md-6">
                   <label for="lastName" class="form-label">Last Name</label>
-                  <input class="form-control" type="text" name="lastName" id="lastName" value="Doe" />
+                  <input class="form-control" type="text" name="lastName" id="lastName" value="Admin" />
                 </div>
                 <div class="mb-3 col-md-6">
                   <label for="email" class="form-label">E-mail</label>
@@ -83,7 +83,7 @@
                     type="text"
                     id="email"
                     name="email"
-                    value="john.doe@example.com"
+                    value="{{  auth()->user()->email  }}"
                     placeholder="john.doe@example.com"
                   />
                 </div>

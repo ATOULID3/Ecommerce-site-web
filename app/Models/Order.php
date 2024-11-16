@@ -18,4 +18,8 @@ class Order extends Model
         'total_price',
         'notes',
     ];
+    public function product()
+{
+    return $this->belongsTo(Product::class, 'product_id');
+}
 }

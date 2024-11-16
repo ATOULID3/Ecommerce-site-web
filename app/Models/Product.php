@@ -21,4 +21,9 @@ class Product extends Model
         'vendor',
         'collection',
     ];
+    public function orders()
+{
+    return $this->hasMany(Order::class, 'product_id');
+}
+
 }

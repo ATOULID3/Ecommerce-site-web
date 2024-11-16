@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Invoice;
 use PDF;
+use App\Models\Client;
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 
 class InvoicesController extends Controller
 {
     public function invoices(){
+        $clientCount=Client::count();
+        $invoiceCount=Invoice::count();
         $invoices=Invoice::all();
-        return view('admin.invoices.invoices',compact('invoices'));
+        return view('admin.invoices.invoices',compact('invoices','clientCount','invoiceCount'));
     }
     public function add_invoice(){
         return view('admin.invoices.add_invoice');

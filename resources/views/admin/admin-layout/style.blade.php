@@ -19,7 +19,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="images/icons/274763268_680404692998477_6439814936089119377_n.jpg" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/icons/274763268_680404692998477_6439814936089119377_n.jpg') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -70,7 +70,7 @@
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
               <div class="app-brand demo">
-                <a href="index-admin" class="app-brand-link">
+                <a href="/index-admin" class="app-brand-link">
                   <span class="app-brand-logo demo">
                     <img src="{{ asset('images/icons/274763268_680404692998477_6439814936089119377_n.jpg') }}" alt="IMG-LOGO" style="height: 50px;">
                   </span>
@@ -93,12 +93,12 @@
                   </a>
                 </li>
                  <!-- DashboardEcommerce -->
-                <li class="menu-item {{ request()->is('Ecommerce_dash') ? 'active' : '' }}">
+                {{-- <li class="menu-item {{ request()->is('Ecommerce_dash') ? 'active' : '' }}">
                     <a href="/Ecommerce_dash" class="menu-link">
                            <i class="menu-icon tf-icons bx bx-home"></i>
                         <div data-i18n="Analytics">Ecommerce Dashboard</div>
                     </a>
-                </li>
+                </li> --}}
                 <!-- clients -->
                 <li class="menu-header small text-uppercase">
                     <span class="menu-header-text">Clients</span>
@@ -476,8 +476,8 @@
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
                 <li class="menu-item">
                   <a
-                    href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                    target="_blank"
+                    href="#"
+                    {{-- target="_blank" --}}
                     class="menu-link"
                   >
                     <i class="menu-icon tf-icons bx bx-support"></i>
@@ -486,8 +486,8 @@
                 </li>
                 <li class="menu-item">
                   <a
-                    href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                    target="_blank"
+                    href="#"
+                    {{-- target="_blank" --}}
                     class="menu-link"
                   >
                     <i class="menu-icon tf-icons bx bx-file"></i>
@@ -558,7 +558,7 @@
                         </div>
                       </li>
                       <li class="dropdown-notifications-list scrollable-container ps">
-                        <ul class="list-group list-group-flush">
+                        <ul class="list-group list-group-flush" style="max-height: 300px; overflow-y: auto;">
                           <li class="list-group-item list-group-item-action dropdown-notifications-item">
                             <div class="d-flex">
                               <div class="flex-shrink-0 me-3">
@@ -577,152 +577,9 @@
                               </div>
                             </div>
                           </li>
-                          <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                            <div class="d-flex">
-                              <div class="flex-shrink-0 me-3">
-                                <div class="avatar">
-                                  <span class="avatar-initial rounded-circle bg-label-danger">CF</span>
-                                </div>
-                              </div>
-                              <div class="flex-grow-1">
-                                <h6 class="small mb-0">Charles Franklin</h6>
-                                <small class="mb-1 d-block text-body">Accepted your connection</small>
-                                <small class="text-muted">12hr ago</small>
-                              </div>
-                              <div class="flex-shrink-0 dropdown-notifications-actions">
-                                <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                                <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                            <div class="d-flex">
-                              <div class="flex-shrink-0 me-3">
-                                <div class="avatar">
-                                  <img src="../../assets/img/avatars/2.png" alt="" class="rounded-circle">
-                                </div>
-                              </div>
-                              <div class="flex-grow-1">
-                                <h6 class="small mb-0">New Message ✉️</h6>
-                                <small class="mb-1 d-block text-body">You have new message from Natalie</small>
-                                <small class="text-muted">1h ago</small>
-                              </div>
-                              <div class="flex-shrink-0 dropdown-notifications-actions">
-                                <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                                <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                            <div class="d-flex">
-                              <div class="flex-shrink-0 me-3">
-                                <div class="avatar">
-                                  <span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-cart"></i></span>
-                                </div>
-                              </div>
-                              <div class="flex-grow-1">
-                                <h6 class="small mb-0">Whoo! You have new order 🛒 </h6>
-                                <small class="mb-1 d-block text-body">ACME Inc. made new order $1,154</small>
-                                <small class="text-muted">1 day ago</small>
-                              </div>
-                              <div class="flex-shrink-0 dropdown-notifications-actions">
-                                <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                                <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                            <div class="d-flex">
-                              <div class="flex-shrink-0 me-3">
-                                <div class="avatar">
-                                  <img src="../../assets/img/avatars/9.png" alt="" class="rounded-circle">
-                                </div>
-                              </div>
-                              <div class="flex-grow-1">
-                                <h6 class="small mb-0">Application has been approved 🚀 </h6>
-                                <small class="mb-1 d-block text-body">Your ABC project application has been approved.</small>
-                                <small class="text-muted">2 days ago</small>
-                              </div>
-                              <div class="flex-shrink-0 dropdown-notifications-actions">
-                                <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                                <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                            <div class="d-flex">
-                              <div class="flex-shrink-0 me-3">
-                                <div class="avatar">
-                                  <span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-pie-chart-alt"></i></span>
-                                </div>
-                              </div>
-                              <div class="flex-grow-1">
-                                <h6 class="small mb-0">Monthly report is generated</h6>
-                                <small class="mb-1 d-block text-body">July monthly financial report is generated </small>
-                                <small class="text-muted">3 days ago</small>
-                              </div>
-                              <div class="flex-shrink-0 dropdown-notifications-actions">
-                                <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                                <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                            <div class="d-flex">
-                              <div class="flex-shrink-0 me-3">
-                                <div class="avatar">
-                                  <img src="../../assets/img/avatars/5.png" alt="" class="rounded-circle">
-                                </div>
-                              </div>
-                              <div class="flex-grow-1">
-                                <h6 class="small mb-0">Send connection request</h6>
-                                <small class="mb-1 d-block text-body">Peter sent you connection request</small>
-                                <small class="text-muted">4 days ago</small>
-                              </div>
-                              <div class="flex-shrink-0 dropdown-notifications-actions">
-                                <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                                <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                            <div class="d-flex">
-                              <div class="flex-shrink-0 me-3">
-                                <div class="avatar">
-                                  <img src="../../assets/img/avatars/6.png" alt="" class="rounded-circle">
-                                </div>
-                              </div>
-                              <div class="flex-grow-1">
-                                <h6 class="small mb-0">New message from Jane</h6>
-                                <small class="mb-1 d-block text-body">Your have new message from Jane</small>
-                                <small class="text-muted">5 days ago</small>
-                              </div>
-                              <div class="flex-shrink-0 dropdown-notifications-actions">
-                                <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                                <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                            <div class="d-flex">
-                              <div class="flex-shrink-0 me-3">
-                                <div class="avatar">
-                                  <span class="avatar-initial rounded-circle bg-label-warning"><i class="bx bx-error"></i></span>
-                                </div>
-                              </div>
-                              <div class="flex-grow-1">
-                                <h6 class="small mb-0">CPU is running high</h6>
-                                <small class="mb-1 d-block text-body">CPU Utilization Percent is currently at 88.63%,</small>
-                                <small class="text-muted">5 days ago</small>
-                              </div>
-                              <div class="flex-shrink-0 dropdown-notifications-actions">
-                                <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                                <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                              </div>
-                            </div>
-                          </li>
+                          <!-- Add other list items here -->
                         </ul>
-                      <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></li>
+                      </li>
                       <li class="border-top">
                         <div class="d-grid p-4">
                           <a class="btn btn-primary btn-sm d-flex" href="javascript:void(0);">
@@ -750,7 +607,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                       <li>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="/profile">
                           <div class="d-flex">
                             <div class="flex-shrink-0 me-3">
                               <div class="avatar avatar-online">
@@ -758,7 +615,7 @@
                               </div>
                             </div>
                             <div class="flex-grow-1">
-                              <span class="fw-semibold d-block">John Doe</span>
+                              <span class="fw-semibold d-block">{{  auth()->user()->name  }}</span>
                               <small class="text-muted">Admin</small>
                             </div>
                           </div>
