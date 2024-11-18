@@ -217,6 +217,16 @@
                       </li>
                     </ul>
                   </li>
+                <!-- Review -->
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">Reviews</span>
+                </li>
+                <li class="menu-item {{ request()->is('reviews') ? 'active' : '' }}">
+                    <a href="/reviews" class="menu-link">
+                      <i class="menu-icon tf-icons bx bx-star"></i>
+                      <div data-i18n="Analytics">Reviews</div>
+                    </a>
+                </li>
                 <!-- pages -->
                 {{-- <li class="menu-header small text-uppercase">
                   <span class="menu-header-text">Pages</span>

@@ -13,6 +13,7 @@ use App\Http\Controllers\Product1Controller;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ReviewController;
 
 // ********************home******************************
 Route::get('/', function () {
@@ -111,6 +112,10 @@ Route::post('/store',[InvoicesController::class,'store'])->name('invoices.store'
 Route::get('/show_invoice/{id}',[InvoicesController::class,'show_invoice'])->name('show.invoice');
 Route::get('/invoices/{id}/pdf', [InvoicesController::class, 'downloadPDF'])->name('invoices.downloadPDF');
 Route::delete('invoice/{invoice}', [InvoicesController::class, 'destroy'])->name('invoice.destroy');
+// ********************reviews******************************
+Route::get('/reviews',[ReviewController::class,'reviews'])->name('reviews');
+Route::get('/add_review',[ReviewController::class,'add_review'])->name('add_review');
+Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews.create');
 // ********************emails******************************
 Route::get('/emails', function () {
     return view('admin.emails.emails');
