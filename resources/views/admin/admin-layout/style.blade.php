@@ -193,6 +193,13 @@
                     </li>
                   </ul>
                 </li>
+                <!-- payment -->
+                <li class="menu-item {{ request()->is('payment') ? 'active' : '' }}">
+                    <a href="/payment" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-dollar"></i>
+                            <div data-i18n="Analytics">Payment</div>
+                    </a>
+                </li>
                 <!-- invoice -->
                 <li class="menu-header small text-uppercase">
                     <span class="menu-header-text">Invoice</span>
@@ -486,8 +493,8 @@
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
                 <li class="menu-item">
                   <a
-                    href="#"
-                    {{-- target="_blank" --}}
+                    href="/contactUs"
+                    target="_blank"
                     class="menu-link"
                   >
                     <i class="menu-icon tf-icons bx bx-support"></i>
