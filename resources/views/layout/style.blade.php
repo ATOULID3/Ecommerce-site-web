@@ -106,6 +106,10 @@
 							<a href="/shoping-cart">Features</a>
 						</li>
 
+                        <li>
+							<a href="/checkout">CheckOut</a>
+						</li>
+
 						<li>
 							<a href="/blog">Blog</a>
 						</li>

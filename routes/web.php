@@ -16,6 +16,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ContactusController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ShopingcartController;
 
 // ********************home******************************
 Route::get('/', function () {
@@ -32,9 +33,9 @@ Route::get('/home-03', function () {
 Route::get('/product1',[Product1Controller::class,'product1'])->name('product1');
 Route::get('/product-detail/{id}',[Product1Controller::class,'detail_product'])->name('product1_detail');
 // ********************shoping******************************
-Route::get('/shoping-cart', function () {
-    return view('shoping.shoping-cart');
-});
+Route::get('/shoping-cart',[ShopingcartController::class,'shoping'])->name('shoping');
+Route::get('/checkout',[ShopingcartController::class,'checkout'])->name('checkout');
+Route::post('/checkout/store', [ShopingcartController::class, 'store'])->name('checkout.store');
 
 // ********************blog******************************
 Route::get('/blog', function () {

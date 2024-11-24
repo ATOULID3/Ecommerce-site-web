@@ -96,6 +96,10 @@
 								<a href="/shoping-cart">Features</a>
 							</li>
 
+                            <li>
+                                <a href="/checkout">CheckOut</a>
+                            </li>
+
 							<li>
 								<a href="/blog">Blog</a>
 							</li>
@@ -1088,11 +1092,27 @@
 			</div>
 
 			<!-- Load more -->
-			<div class="flex-c-m flex-w w-full p-t-45">
-				<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-					Load More
-				</a>
-			</div>
+            <div class="flex-l-m flex-w w-full p-t-10 m-lr--7">
+                <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
+                    1
+                </a>
+
+                <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">
+                    2
+                </a>
+
+                <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">
+                    3
+                </a>
+
+                <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">
+                    4
+                </a>
+
+                <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">
+                    5
+                </a>
+            </div>
 		</div>
 	</div>
 
