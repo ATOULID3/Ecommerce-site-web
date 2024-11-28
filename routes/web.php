@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ClientController;
@@ -14,9 +15,9 @@ use App\Http\Controllers\LogisticController;
 use App\Http\Controllers\Product1Controller;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ContactusController;
+use App\Http\Controllers\ShopingcartController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\ShopingcartController;
 
 // ********************home******************************
 Route::get('/', function () {
@@ -115,6 +116,9 @@ Route::post('/store',[InvoicesController::class,'store'])->name('invoices.store'
 Route::get('/show_invoice/{id}',[InvoicesController::class,'show_invoice'])->name('show.invoice');
 Route::get('/invoices/{id}/pdf', [InvoicesController::class, 'downloadPDF'])->name('invoices.downloadPDF');
 Route::delete('invoice/{invoice}', [InvoicesController::class, 'destroy'])->name('invoice.destroy');
+// ********************chat******************************
+Route::get('/chat',[ChatController::class,'chat'])->name('chat');
+Route::post('/chat/store', [ChatController::class, 'sendMessage'])->name('chat.store');
 // ********************payment******************************
 Route::get('/payment',[PaymentController::class,'payment'])->name('payment');
 Route::post('/admin/payment', [PaymentController::class, 'store'])->name('payment.store');

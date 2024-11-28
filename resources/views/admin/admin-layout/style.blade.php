@@ -224,6 +224,16 @@
                       </li>
                     </ul>
                   </li>
+                <!-- chat -->
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">Chat</span>
+                  </li>
+                  <li class="menu-item {{ request()->is('chat') ? 'active' : '' }}">
+                    <a href="/chat" class="menu-link">
+                      <i class="menu-icon tf-icons bx bx-chat"></i>
+                      <div data-i18n="Analytics">Chat</div>
+                    </a>
+                  </li>
                 <!-- Review -->
                 <li class="menu-header small text-uppercase">
                     <span class="menu-header-text">Reviews</span>
