@@ -116,10 +116,72 @@
 											<i class="fs-16 zmdi zmdi-plus"></i>
 										</div>
 									</div>
+                                    <div>
+                                        <input type="text" hidden id="id_product" value="{{$product->id}}" >
+                                        <input type="text" hidden id="name_product" value="{{$product->name}}" >
+                                        <input type="text" hidden id="price_product" value="{{$product->price}}" >
+                                        <input type="text" hidden id="image_product" value="{{ asset('product/' . $product->image) }}">
+                                    </div>
 
 									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 										Add to cart
 									</button>
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function () {
+                                            const addToCartButton = document.querySelector('.js-addcart-detail');
+                                            const quantityInput = document.querySelector('.num-product');
+                                            const minusButton = document.querySelector('.btn-num-product-down');
+                                            const plusButton = document.querySelector('.btn-num-product-up');
+
+                                            // Event listener to handle the add-to-cart button click
+                                            addToCartButton.addEventListener('click', function() {
+                                                const productId = document.getElementById('id_product').value;
+                                                const productName = document.getElementById('name_product').value;
+                                                const productPrice = document.getElementById('price_product').value;
+                                                const productImage = document.getElementById('image_product').value;
+                                                const productQuantity = parseInt(quantityInput.value) || 1;
+
+                                                // Create a product object with the captured values
+                                                const product = {
+                                                    id: productId,
+                                                    name: productName,
+                                                    price: parseFloat(productPrice),
+                                                    image: productImage,
+                                                    quantity: productQuantity
+                                                };
+
+                                                // Retrieve the cart from localStorage or create an empty array if it doesn't exist
+                                                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                                                // Check if the product is already in the cart
+                                                const existingProductIndex = cart.findIndex(item => item.id === product.id);
+
+                                                if (existingProductIndex >= 0) {
+                                                    // If the product is in the cart, update the quantity
+                                                    cart[existingProductIndex].quantity += productQuantity;
+                                                } else {
+                                                    // If the product is not in the cart, add it to the cart
+                                                    cart.push(product);
+                                                }
+
+                                                // Save the updated cart back to localStorage
+                                                localStorage.setItem('cart', JSON.stringify(cart));
+                                            });
+
+                                            // Event listeners for quantity input handling
+                                            minusButton.addEventListener('click', function () {
+                                                let currentQuantity = parseInt(quantityInput.value) || 1;
+                                                if (currentQuantity > 1) {
+                                                    quantityInput.value = currentQuantity - 0;
+                                                }
+                                            });
+
+                                            plusButton.addEventListener('click', function () {
+                                                let currentQuantity = parseInt(quantityInput.value) || 1;
+                                                quantityInput.value = currentQuantity + 0;
+                                            });
+                                        });
+                                        </script>
 								</div>
 							</div>
 						</div>

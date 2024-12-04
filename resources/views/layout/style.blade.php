@@ -130,17 +130,36 @@
 						<i class="zmdi zmdi-search"></i>
 					</div>
 
-					<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
-						<i class="zmdi zmdi-shopping-cart"></i>
+					<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="3">
+						<i class="zmdi zmdi-favorite-outline"></i>
 					</div>
 
-					<a href="/shoping-cart" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-						<i class="zmdi zmdi-favorite-outline"></i>
+					<a href="/shoping-cart" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti show-count" data-notify="0">
+						<i class="zmdi zmdi-shopping-cart"></i>
 					</a>
 				</div>
 			</nav>
 		</div>
 	</div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cartIconElement = document.querySelector(".icon-header-item.show-count");
+            const localStorageKey = "cart";
+
+            // Function to update the cart count
+            function updateCartCount() {
+                const cart = JSON.parse(localStorage.getItem(localStorageKey)) || [];
+                const productCount = cart.reduce((total, item) => total + item.quantity, 0);
+                cartIconElement.setAttribute("data-notify", productCount);
+            }
+
+            // Initial render
+            updateCartCount();
+
+            // Example usage: Call this function anytime the cart changes
+            // updateCartCount();
+        });
+    </script>
 
 	<!-- Header Mobile -->
 	<div class="wrap-header-mobile">
@@ -155,13 +174,13 @@
 				<i class="zmdi zmdi-search"></i>
 			</div>
 
-			<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
-				<i class="zmdi zmdi-shopping-cart"></i>
-			</div>
+            <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="3">
+                <i class="zmdi zmdi-favorite-outline"></i>
+            </div>
 
-			<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
-				<i class="zmdi zmdi-favorite-outline"></i>
-			</a>
+            <a href="/shoping-cart" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti show-count" data-notify="0">
+                <i class="zmdi zmdi-shopping-cart"></i>
+            </a>
 		</div>
 
 		<!-- Button show menu -->
@@ -478,8 +497,6 @@
 				<p class="stext-107 cl6 txt-center">
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#" target="_blank">BADREDDINE ATOULID</a> &amp; distributed by <a href="#" target="_blank">BADREDDINE ATOULID</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-
 				</p>
 			</div>
 		</div>
