@@ -19,6 +19,7 @@ shoping-cart
 
 
 	<!-- Shoping Cart -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 	<form class="bg0 p-t-75 p-b-85">
 		<div class="container">
 			<div class="row">
@@ -114,27 +115,41 @@ shoping-cart
 									</span>
 
 									<div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-										<select class="js-select2" name="time">
-											<option>Select a country...</option>
-											<option>USA</option>
-											<option>UK</option>
+										<select class="js-select2" id="method-pay" name="method-pay">
+											<option>Select a Method Pay...</option>
+											<option>Credit Card</option>
+											<option>PayPal</option>
+                                            <option>Cash on Delivery</option>
+                                            <option>Bank Transfer</option>
+                                            <option>Apple Pay</option>
+										</select>
+										<div class="dropDownSelect2"></div>
+									</div>
+
+                                    <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
+										<select class="js-select2" id="status" name="status">
+											<option>Select Status...</option>
+											<option>Pending</option>
+											<option>Completed</option>
+                                            <option>Canceled</option>
+                                            <option>Shipped</option>
 										</select>
 										<div class="dropDownSelect2"></div>
 									</div>
 
 									<div class="bor8 bg0 m-b-12">
-										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="State /  country">
+										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" id="client-name" name="client-name" placeholder="Your Name">
 									</div>
 
 									<div class="bor8 bg0 m-b-22">
-										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Postcode / Zip">
+										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" id="client-email" name="client-email" placeholder="Your Email">
 									</div>
 
-									<div class="flex-w">
+									{{-- <div class="flex-w">
 										<div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
 											Update Totals
 										</div>
-									</div>
+									</div> --}}
 
 								</div>
 							</div>
@@ -155,7 +170,7 @@ shoping-cart
 							</div>
 						</div> --}}
 
-						<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+						<button id="checkout-button" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
 							Proceed to Checkout
 						</button>
 					</div>
@@ -265,5 +280,67 @@ shoping-cart
             // Initial cart refresh
             refreshCart();
         });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    const checkoutButton = document.getElementById('checkout-button');
+
+    checkoutButton.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        // Récupérer le panier
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Vérifier si le panier est vide
+        if (cart.length === 0) {
+            Swal.fire('Error', 'Your cart is empty!', 'error');
+            return;
+        }
+
+        // Demander confirmation pour procéder
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you want to place the order?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, Place Order',
+            cancelButtonText: 'No, Cancel',
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Envoyer les données au serveur
+                fetch('/checkout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    },
+                    body: JSON.stringify({ cart }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Your order has been placed successfully.',
+                            icon: 'success',
+                            confirmButtonText: 'OK',
+                        }).then(() => {
+                            window.location.href = '/order-confirmation'; // Rediriger vers la page de confirmation
+                        });
+                    } else {
+                        Swal.fire('Error', data.message || 'Failed to place the order. Please try again.', 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire('Error', 'Something went wrong. Please try again later.', 'error');
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire('Cancelled', 'Your order was not placed.', 'info');
+            }
+        });
+    });
+});
     </script>
 @endsection

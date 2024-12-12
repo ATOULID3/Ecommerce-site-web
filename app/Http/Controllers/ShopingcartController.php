@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Ckeckout;
 use Illuminate\Http\Request;
@@ -17,27 +18,27 @@ class ShopingcartController extends Controller
     }
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'product_id' => 'exists:products,id',
-            'quantity' => 'integer|min:1',
-            'address' => 'string',
-            'code_promo' => 'nullable|string',
+        $data = $request->validate([
+            'client_name' => 'required|string|max:255',
+            'client_email' => 'required|email|max:255',
+            'status' => 'required|string',
+            'method_pay' => 'required|string',
+            'products' => 'required|array',
+            'products.*.id' => 'required|exists:products,id',
+            'products.*.quantity' => 'required|integer|min:1'
         ]);
 
-        $product = Product::find($validatedData['product_id']);
-        $totalPrice = $product->price * $validatedData['quantity'];
-
-        $checkout = Ckeckout::create([
-            'product_id' => $validatedData['product_id'],
-            'quantity' => $validatedData['quantity'],
-            'total_price' => $totalPrice,
-            'code_promo' => $validatedData['code_promo'],
-            'address' => $validatedData['address'],
+        $order = Order::create([
+            'client_name' => $data['client_name'],
+            'client_email' => $data['client_email'],
+            'status' => $data['status'],
+            'method_pay' => $data['method_pay'],
         ]);
 
-        return response()->json([
-            'message' => 'Checkout successfully created!',
-            'data' => $checkout,
-        ]);
+        foreach ($data['products'] as $product) {
+            $order->products()->attach($product['id'], ['quantity' => $product['quantity']]);
+        }
+
+        return response()->json(['success' => true]);
     }
 }
