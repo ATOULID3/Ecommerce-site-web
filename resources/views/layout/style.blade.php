@@ -48,6 +48,101 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
     </head>
 <body class="animsition">
+    <div id="cookie-banner" style="display: none; position: fixed; bottom: 0; width: 100%; background: #333; color: white; padding: 20px; text-align: center; z-index: 1000;">
+        <p>
+            This website uses cookies to ensure you get the best experience on our site. By continuing, you agree to our
+            <a href="/privacy-policy" style="color: #4caf50;">cookie policy</a>.
+        </p>
+        <div style="margin-top: 15px;">
+            <button id="accept-essential" style="margin-right: 10px; padding: 10px 20px; background: #4caf50; color: white; border: none; cursor: pointer;">
+                Accept Essential Cookies
+            </button>
+            <button id="customize-cookies" style="padding: 10px 20px; background: #ffa500; color: white; border: none; cursor: pointer;">
+                Customize Cookies
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal for Cookie Customization -->
+    <div id="cookie-settings-modal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; color: black; padding: 20px; border-radius: 8px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); z-index: 1100;">
+        <h3>Customize Cookies</h3>
+        <form id="cookie-settings-form">
+            <label><input type="checkbox" name="essential" disabled checked> Essential (Required)</label><br>
+            <label><input type="checkbox" name="functional"> Functional</label><br>
+            <label><input type="checkbox" name="analytics"> Analytics</label><br>
+            <button type="submit" style="margin-top: 10px; padding: 10px 20px; background: #4caf50; color: white; border: none; cursor: pointer;">
+                Save Preferences
+            </button>
+        </form>
+    </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const cookieBanner = document.getElementById('cookie-banner');
+        const cookieModal = document.getElementById('cookie-settings-modal');
+        const acceptEssentialBtn = document.getElementById('accept-essential');
+        const customizeCookiesBtn = document.getElementById('customize-cookies');
+        const cookieSettingsForm = document.getElementById('cookie-settings-form');
+
+        function setCookie(name, value, days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            document.cookie = `${name}=${value}; path=/; expires=${date.toUTCString()}`;
+        }
+
+        function getCookie(name) {
+            const cookies = document.cookie.split(';');
+            for (const cookie of cookies) {
+                const [key, value] = cookie.trim().split('=');
+                if (key === name) return value;
+            }
+            return null;
+        }
+
+        // Check if consent is already given
+        if (!getCookie('cookieConsent')) {
+            cookieBanner.style.display = 'block';
+        }
+
+        acceptEssentialBtn.addEventListener('click', function () {
+            setCookie('cookieConsent', JSON.stringify({ essential: true, functional: false, analytics: false }), 365);
+            cookieBanner.style.display = 'none';
+        });
+
+        customizeCookiesBtn.addEventListener('click', function () {
+            cookieModal.style.display = 'block';
+        });
+
+        cookieSettingsForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const formData = new FormData(cookieSettingsForm);
+            const preferences = {
+                essential: true, // Always true for essential cookies
+                functional: formData.get('functional') === 'on',
+                analytics: formData.get('analytics') === 'on',
+            };
+            setCookie('cookieConsent', JSON.stringify(preferences), 365);
+            cookieModal.style.display = 'none';
+            cookieBanner.style.display = 'none';
+        });
+    });
+</script>
+<style>
+    #cookie-consent-banner {
+        font-family: Arial, sans-serif;
+    }
+
+    #cookie-consent-banner p {
+        display: inline-block;
+        margin: 0;
+    }
+
+    #cookie-consent-banner button {
+        margin-left: 15px;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+</style>
+
 <header>
 	<!-- Header desktop -->
 	<div class="container-menu-desktop">
@@ -144,11 +239,11 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const cartIconElement = document.querySelector(".icon-header-item.show-count");
-            const localStorageKey = "cart";
+            const sessionStorageKey = "cart";
 
             // Function to update the cart count
             function updateCartCount() {
-                const cart = JSON.parse(localStorage.getItem(localStorageKey)) || [];
+                const cart = JSON.parse(sessionStorage.getItem(sessionStorageKey)) || [];
                 const productCount = cart.reduce((total, item) => total + item.quantity, 0);
                 cartIconElement.setAttribute("data-notify", productCount);
             }
@@ -178,10 +273,29 @@
                 <i class="zmdi zmdi-favorite-outline"></i>
             </div>
 
-            <a href="/shoping-cart" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti show-count" data-notify="0">
+            <a href="/shoping-cart" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti show-countt" data-notify="0">
                 <i class="zmdi zmdi-shopping-cart"></i>
             </a>
 		</div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const cartIconElement = document.querySelector(".icon-header-item.show-countt");
+                const sessionStorageKey = "cart";
+
+                // Function to update the cart count
+                function updateCartCount() {
+                    const cart = JSON.parse(sessionStorage.getItem(sessionStorageKey)) || [];
+                    const productCount = cart.reduce((total, item) => total + item.quantity, 0);
+                    cartIconElement.setAttribute("data-notify", productCount);
+                }
+
+                // Initial render
+                updateCartCount();
+
+                // Example usage: Call this function anytime the cart changes
+                // updateCartCount();
+            });
+        </script>
 
 		<!-- Button show menu -->
 		<div class="btn-show-menu-mobile hamburger hamburger--squeeze">

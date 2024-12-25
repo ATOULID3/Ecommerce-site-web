@@ -151,7 +151,7 @@
                                                 };
 
                                                 // Retrieve the cart from localStorage or create an empty array if it doesn't exist
-                                                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                                                let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
 
                                                 // Check if the product is already in the cart
                                                 const existingProductIndex = cart.findIndex(item => item.id === product.id);
@@ -165,7 +165,7 @@
                                                 }
 
                                                 // Save the updated cart back to localStorage
-                                                localStorage.setItem('cart', JSON.stringify(cart));
+                                                sessionStorage.setItem('cart', JSON.stringify(cart));
                                             });
 
                                             // Event listeners for quantity input handling

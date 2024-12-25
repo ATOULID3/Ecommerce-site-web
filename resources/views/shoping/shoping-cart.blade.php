@@ -182,7 +182,7 @@ shoping-cart
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Retrieve cart from local storage
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
 
             // Get the cart table and template row
             const cartTable = document.querySelector('.table-shopping-cart');
@@ -230,7 +230,7 @@ shoping-cart
                             if (result.isConfirmed) {
                                 const productId = product.id; // Get product ID
                                 cart = cart.filter(item => item.id !== productId); // Remove the clicked product
-                                localStorage.setItem('cart', JSON.stringify(cart)); // Save updated cart
+                                sessionStorage.setItem('cart', JSON.stringify(cart)); // Save updated cart
                                 refreshCart(); // Refresh the cart display
                                 updateCartTotals(); // Update totals
                                 Swal.fire(
@@ -253,7 +253,7 @@ shoping-cart
                         cart[index].quantity++;
                         qtyInput.value = cart[index].quantity;
                         row.querySelector('.product-total').textContent = `$${(cart[index].price * cart[index].quantity).toFixed(2)}`;
-                        localStorage.setItem('cart', JSON.stringify(cart));
+                        sessionStorage.setItem('cart', JSON.stringify(cart));
                         updateCartTotals();
                     });
 
@@ -264,7 +264,7 @@ shoping-cart
                             cart[index].quantity--;
                             qtyInput.value = cart[index].quantity;
                             row.querySelector('.product-total').textContent = `$${(cart[index].price * cart[index].quantity).toFixed(2)}`;
-                            localStorage.setItem('cart', JSON.stringify(cart));
+                            sessionStorage.setItem('cart', JSON.stringify(cart));
                             updateCartTotals();
                         }
                     });
@@ -289,7 +289,7 @@ shoping-cart
         e.preventDefault();
 
         // Récupérer le panier
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cart = JSON.parse(sessionStorage.getItem('cart')) || [];
 
         // Vérifier si le panier est vide
         if (cart.length === 0) {
