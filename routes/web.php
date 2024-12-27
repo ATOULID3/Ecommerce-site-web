@@ -118,6 +118,7 @@ Route::delete('invoice/{invoice}', [InvoicesController::class, 'destroy'])->name
 // ********************chat******************************
 Route::get('/chat',[ChatController::class,'chat'])->name('chat');
 Route::post('/chat/store', [ChatController::class, 'sendMessage'])->name('chat.store');
+Route::post('/send-email', [ChatController::class, 'sendEmail'])->name('email.send');
 // ********************payment******************************
 Route::get('/payment',[PaymentController::class,'payment'])->name('payment');
 Route::post('/admin/payment', [PaymentController::class, 'store'])->name('payment.store');

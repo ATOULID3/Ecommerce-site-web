@@ -6,7 +6,9 @@ use App\Models\Chat;
 use App\Models\User;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use App\Mail\ClientNotification;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ChatController extends Controller
 {
@@ -29,5 +31,26 @@ class ChatController extends Controller
         $chats->save();
 
         return redirect('/chat');
+    }
+    public function sendEmail(Request $request)
+    {
+        $request->validate([
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+
+        $clients = Client::all();
+
+        foreach ($clients as $client) {
+            $messageContent = [
+                'name' => $client->name,
+                'body' => $request->message,
+                'subject' => $request->subject, // Pass the subject here
+            ];
+
+            Mail::to($client->email)->send(new ClientNotification($messageContent));
+        }
+
+        return redirect()->back()->with('success', 'Emails have been sent to all clients.');
     }
 }

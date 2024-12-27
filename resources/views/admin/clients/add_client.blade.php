@@ -60,9 +60,9 @@
                           <label for="largeSelect" class="form-label">CONTRY</label>
                           <select id="largeSelect" class="form-select form-select-lg" name="address">
                             <option>Large select</option>
-                            <option value="1">MAROC</option>
-                            <option value="2">FRANCE</option>
-                            <option value="3">USA</option>
+                            <option value="maroc">MAROC</option>
+                            <option value="france">FRANCE</option>
+                            <option value="usa">USA</option>
                           </select>
                         </div>
                         {{-- <div class="mb-3">

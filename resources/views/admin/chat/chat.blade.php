@@ -275,6 +275,47 @@
         });
     </script>
 </div>
+<br>
+<hr>
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h1 class="text-center mb-0">Send Email to All Clients</h1>
+        </div>
+        <div class="card-body">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('email.send') }}" method="POST">
+                @csrf
+                <div class="mb-3">
+                    <label for="subject" class="form-label">Subject:</label>
+                    <input type="text" class="form-control" id="subject" name="subject" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message:</label>
+                    <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Send Email</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 @endsection
