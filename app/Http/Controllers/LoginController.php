@@ -14,8 +14,9 @@ class LoginController extends Controller
     public function login_trait(Request $request){
         $email = $request-> email;
         $password= $request-> password;
+        $remember = $request->has('remember'); // Check if the "Remember Me" checkbox is checked
         $credentials= ['email'=>$email,"password"=>$password];
-        if(Auth::attempt($credentials)){
+        if(Auth::attempt($credentials, $remember)){
             $request->session()->regenerate();
             return redirect('/index-admin');
 

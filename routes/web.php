@@ -18,6 +18,8 @@ use App\Http\Controllers\ContactusController;
 use App\Http\Controllers\ShopingcartController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\VerificationController;
+
 
 // ********************home******************************
 Route::get('/', function () {
@@ -65,8 +67,11 @@ Route::get('forgot-password', [ForgotPasswordController::class, 'forgotpassword'
 Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+Route::get('/email/verify', [VerificationController::class, 'show'])->middleware('auth')->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->middleware('auth', 'signed')->name('verification.verify');
+Route::post('/email/resend', [VerificationController::class, 'resend'])->middleware('auth')->name('verification.resend');
 // ********************admin******************************
-Route::middleware('auth')->group(function(){
+Route::middleware('auth','verified')->group(function(){
 Route::get('/index-admin', function () {
     return view('admin.admin-layout.dashbord');
 });
