@@ -571,7 +571,7 @@
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                       <span class="position-relative">
                         <i class="bx bx-bell bx-sm"></i>
-                        <span class="badge rounded-pill bg-danger badge-dot badge-notifications border"></span>
+                        <span class="badge rounded-pill bg-danger badge-dot badge-notifications border">{{ auth()->user()->unreadNotifications->count() }}</span>
                       </span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end p-0">
@@ -579,11 +579,12 @@
                         <div class="dropdown-header d-flex align-items-center py-3">
                           <h6 class="mb-0 me-auto">Notification</h6>
                           <div class="d-flex align-items-center h6 mb-0">
-                            <span class="badge bg-label-primary me-2">8 New</span>
-                            <a href="javascript:void(0)" class="dropdown-notifications-all p-2" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Mark all as read" data-bs-original-title="Mark all as read"><i class="bx bx-envelope-open text-heading"></i></a>
+                            <span class="badge bg-label-primary me-2">{{ auth()->user()->unreadNotifications->count() }} New</span>
+                            <a href="{{ route('notifications.markAllAsRead') }}" class="dropdown-notifications-all p-2" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Mark all as read" data-bs-original-title="Mark all as read"><i class="bx bx-envelope-open text-heading"></i></a>
                           </div>
                         </div>
                       </li>
+                      @forelse (auth()->user()->unreadNotifications as $notification)
                       <li class="dropdown-notifications-list scrollable-container ps">
                         <ul class="list-group list-group-flush" style="max-height: 300px; overflow-y: auto;">
                           <li class="list-group-item list-group-item-action dropdown-notifications-item">
@@ -594,22 +595,25 @@
                                 </div>
                               </div>
                               <div class="flex-grow-1">
-                                <h6 class="small mb-0">Congratulation Lettie 🎉</h6>
-                                <small class="mb-1 d-block text-body">Won the monthly best seller gold badge</small>
-                                <small class="text-muted">1h ago</small>
+                                <h6 class="small mb-0">New Order 🎉</h6>
+                                <small class="mb-1 d-block text-body">New Order from {{ $notification->data['customer_name'] }} - ${{ $notification->data['total_price'] }}</small>
+                                <small class="text-muted">{{ \Carbon\Carbon::parse($notification->created_at)->diffForHumans() }}</small>
                               </div>
                               <div class="flex-shrink-0 dropdown-notifications-actions">
                                 <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                                <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                                <a href="{{ route('notifications.read', $notification->id) }}" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
                               </div>
                             </div>
                           </li>
                           <!-- Add other list items here -->
                         </ul>
                       </li>
+                      @empty
+                      <li><a class="dropdown-item" href="#">No new notifications</a></li>
+                      @endforelse
                       <li class="border-top">
                         <div class="d-grid p-4">
-                          <a class="btn btn-primary btn-sm d-flex" href="javascript:void(0);">
+                          <a class="btn btn-primary btn-sm d-flex" href="/order">
                             <small class="align-middle">View all notifications</small>
                           </a>
                         </div>
@@ -620,7 +624,7 @@
                     <a class="nav-link " href="/emails"  data-bs-auto-close="outside" aria-expanded="false">
                       <span class="position-relative">
                         <i class="bx bx-envelope bx-sm"></i>
-                        <span class="badge rounded-pill bg-danger badge-dot badge-notifications border"></span>
+                        <span class="badge rounded-pill bg-danger badge-dot badge-notifications border">+20</span>
                       </span>
                     </a>
                   </li>

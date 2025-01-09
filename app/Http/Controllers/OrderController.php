@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Client;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\NewOrderNotification;
 
 class OrderController extends Controller
 {
@@ -35,7 +38,10 @@ class OrderController extends Controller
         ]);
 
         // Créer la commande
-        Order::create($request->all());
+        $order = Order::create($request->all());
+        // Notify admins about the new order
+        $users= User::all(); // Adjust the query to fetch admin users
+        Notification::send($users, new NewOrderNotification($order));
 
         // Rediriger avec un message de succès
         return redirect()->route('order')->with('success', 'Order has been added successfully.');

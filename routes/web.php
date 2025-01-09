@@ -16,9 +16,10 @@ use App\Http\Controllers\Product1Controller;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ContactusController;
 use App\Http\Controllers\ShopingcartController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\VerificationController;
 
 
 // ********************home******************************
@@ -133,6 +134,10 @@ Route::get('/contactUs',[ContactusController::class,'contact'])->name('contact.f
 Route::get('/reviews',[ReviewController::class,'reviews'])->name('reviews');
 Route::get('/add_review',[ReviewController::class,'add_review'])->name('add_review');
 Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews.create');
+// ********************notification******************************
+Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+Route::get('/notifications/mark-as-read/{id}', [NotificationController::class, 'markAsRead'])->name('notifications.read');
+Route::get('/notifications/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAllAsRead');
 // ********************emails******************************
 Route::get('/emails', function () {
     return view('admin.emails.emails');
