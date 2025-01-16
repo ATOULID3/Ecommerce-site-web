@@ -224,6 +224,16 @@
                       </li>
                     </ul>
                   </li>
+                <!-- imports -->
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">Imports</span>
+                  </li>
+                  <li class="menu-item {{ request()->is('imports') ? 'active' : '' }}">
+                    <a href="/imports" class="menu-link">
+                      <i class="menu-icon tf-icons bx bx-import"></i>
+                      <div data-i18n="Analytics">Import</div>
+                    </a>
+                  </li>
                 <!-- Notification -->
                 <li class="menu-header small text-uppercase">
                     <span class="menu-header-text">Notification</span>
@@ -623,7 +633,7 @@
                       @endforelse
                       <li class="border-top">
                         <div class="d-grid p-4">
-                          <a class="btn btn-primary btn-sm d-flex" href="/order">
+                          <a class="btn btn-primary btn-sm d-flex" href="/notifications">
                             <small class="align-middle">View all notifications</small>
                           </a>
                         </div>

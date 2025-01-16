@@ -22,4 +22,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrapFive();
     }
+    protected $listen = [
+        \App\Events\OrderPlaced::class => [
+            \App\Listeners\SendOrderConfirmation::class,
+        ],
+    ];
 }

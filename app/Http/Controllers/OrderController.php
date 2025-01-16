@@ -6,9 +6,10 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\Client;
 use App\Models\Product;
+use App\Events\OrderPlaced;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Notification;
 use App\Notifications\NewOrderNotification;
+use Illuminate\Support\Facades\Notification;
 
 class OrderController extends Controller
 {
@@ -39,6 +40,8 @@ class OrderController extends Controller
 
         // Créer la commande
         $order = Order::create($request->all());
+        // Dispatch the event
+         event(new OrderPlaced($order));
         // Notify admins about the new order
         $users= User::all(); // Adjust the query to fetch admin users
         Notification::send($users, new NewOrderNotification($order));

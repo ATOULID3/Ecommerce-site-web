@@ -20,7 +20,7 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
-
+use App\Http\Controllers\ImportController;
 
 // ********************home******************************
 Route::get('/', function () {
@@ -138,6 +138,8 @@ Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
 Route::get('/notifications/mark-as-read/{id}', [NotificationController::class, 'markAsRead'])->name('notifications.read');
 Route::get('/notifications/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAllAsRead');
+// ********************imports******************************
+Route::get('/imports', [ImportController::class, 'index'])->name('import');
 // ********************emails******************************
 Route::get('/emails', function () {
     return view('admin.emails.emails');
