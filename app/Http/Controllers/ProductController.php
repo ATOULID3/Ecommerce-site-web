@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Str;
+use App\Mail\NewProductMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ProductController extends Controller
 {
@@ -53,7 +56,13 @@ class ProductController extends Controller
         }
 
         $product->save();
+    // Get all customers
+    $clients = Client::all()->pluck('email');
 
+    // Send email to all customers
+    foreach ($clients as $email) {
+        Mail::to($email)->queue(new NewProductMail($product));
+    }
         return redirect()->route('product')->with('success', 'Product created successfully.');
     }
 
